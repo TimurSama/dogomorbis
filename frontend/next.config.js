@@ -24,7 +24,8 @@ const nextConfig = {
   
   // Настройки для продакшн
   ...(process.env.NODE_ENV === 'production' && {
-    output: 'standalone',
+    output: 'export',
+    trailingSlash: true,
     swcMinify: true,
     compiler: {
       removeConsole: {
