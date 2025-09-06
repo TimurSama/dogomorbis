@@ -163,7 +163,7 @@ export function LoginForm() {
         className="w-full"
         loading={isLoading}
         size="lg"
-        variant="primary"
+        variant="default"
       >
         {isLoading ? 'Вход...' : 'Войти'}
       </Button>
