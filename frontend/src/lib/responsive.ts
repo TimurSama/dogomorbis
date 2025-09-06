@@ -151,7 +151,7 @@ export const adaptive = {
   container: 'container mx-auto px-4 md:px-6 lg:px-8',
   
   // Адаптивные карточки
-  card: 'bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-4 md:p-6',
+  card: 'bg-white bg-gray-800 rounded-lg shadow-sm border border-gray-200 border-gray-700 p-4 md:p-6',
   
   // Адаптивные кнопки
   button: 'px-4 py-2 md:px-6 md:py-3 rounded-lg font-medium transition-colors',
@@ -178,7 +178,7 @@ export const a11y = {
   skipLink: 'absolute -top-40 left-6 bg-primary-600 text-white px-4 py-2 rounded focus:top-6',
   
   // High contrast
-  highContrast: 'border-2 border-gray-900 dark:border-white',
+  highContrast: 'border-2 border-gray-900 border-white',
 };
 
 // Утилиты для производительности

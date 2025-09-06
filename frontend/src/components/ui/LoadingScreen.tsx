@@ -10,7 +10,7 @@ interface LoadingScreenProps {
 
 export function LoadingScreen({ message = 'Загрузка...', showLogo = true }: LoadingScreenProps) {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-primary-50 to-secondary-50 dark:from-gray-900 dark:to-gray-800">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-primary-50 to-secondary-50 from-gray-900 to-gray-800">
       <div className="text-center">
         {showLogo && (
           <motion.div
@@ -22,10 +22,10 @@ export function LoadingScreen({ message = 'Загрузка...', showLogo = true
             <div className="flex items-center justify-center mb-4">
               <Dog className="h-16 w-16 text-primary-600" />
             </div>
-            <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
+            <h1 className="text-3xl font-bold text-gray-900 text-white mb-2">
               Dogymorbis
             </h1>
-            <p className="text-gray-600 dark:text-gray-400">
+            <p className="text-gray-600 text-gray-400">
               Сообщество собачников
             </p>
           </motion.div>
@@ -49,7 +49,7 @@ export function LoadingScreen({ message = 'Загрузка...', showLogo = true
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5, duration: 0.5 }}
-            className="text-gray-600 dark:text-gray-400 text-lg"
+            className="text-gray-600 text-gray-400 text-lg"
           >
             {message}
           </motion.p>

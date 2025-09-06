@@ -214,7 +214,7 @@ export function WalletScreen({ isGuest = false, onShowAuth }: WalletScreenProps)
       <div className="h-full flex items-center justify-center">
         <div className="text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-500 mx-auto mb-4"></div>
-          <p className="text-gray-600 dark:text-gray-400">Загружаем кошелёк...</p>
+          <p className="text-gray-600 text-gray-400">Загружаем кошелёк...</p>
         </div>
       </div>
     );
@@ -302,7 +302,7 @@ export function WalletScreen({ isGuest = false, onShowAuth }: WalletScreenProps)
       </div>
 
       {/* Tabs */}
-      <div className="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 flex-shrink-0">
+      <div className="bg-white bg-gray-800 border-b border-gray-200 border-gray-700 flex-shrink-0">
         <div className="flex space-x-0">
           {[
             { id: 'overview', label: 'Обзор', icon: Wallet },
@@ -317,8 +317,8 @@ export function WalletScreen({ isGuest = false, onShowAuth }: WalletScreenProps)
                 onClick={() => setActiveTab(tab.id as any)}
                 className={`flex-1 flex items-center justify-center space-x-2 py-3 px-4 text-sm font-medium transition-colors ${
                   activeTab === tab.id
-                    ? 'text-primary-600 border-b-2 border-primary-600 bg-primary-50 dark:bg-primary-900/20'
-                    : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white'
+                    ? 'text-primary-600 border-b-2 border-primary-600 bg-primary-50 bg-primary-900/20'
+                    : 'text-gray-600 text-gray-400 hover:text-gray-900 hover:text-white'
                 }`}
               >
                 <Icon className="h-4 w-4" />
@@ -342,43 +342,43 @@ export function WalletScreen({ isGuest = false, onShowAuth }: WalletScreenProps)
             >
               {/* Balance Cards */}
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <div className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-sm">
+                <div className="bg-white bg-gray-800 rounded-lg p-6 shadow-sm">
                   <div className="flex items-center justify-between">
                     <div>
-                      <p className="text-sm text-gray-600 dark:text-gray-400">Баланс</p>
-                      <p className="text-2xl font-bold text-gray-900 dark:text-white">
+                      <p className="text-sm text-gray-600 text-gray-400">Баланс</p>
+                      <p className="text-2xl font-bold text-gray-900 text-white">
                         {walletData.balance.toLocaleString()} ₽
                       </p>
                     </div>
-                    <div className="w-12 h-12 bg-primary-100 dark:bg-primary-900 rounded-full flex items-center justify-center">
+                    <div className="w-12 h-12 bg-primary-100 bg-primary-900 rounded-full flex items-center justify-center">
                       <Banknote className="h-6 w-6 text-primary-600" />
                     </div>
                   </div>
                 </div>
 
-                <div className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-sm">
+                <div className="bg-white bg-gray-800 rounded-lg p-6 shadow-sm">
                   <div className="flex items-center justify-between">
                     <div>
-                      <p className="text-sm text-gray-600 dark:text-gray-400">Косточки</p>
+                      <p className="text-sm text-gray-600 text-gray-400">Косточки</p>
                       <p className="text-2xl font-bold text-orange-600">
                         {walletData.bones.toLocaleString()}
                       </p>
                     </div>
-                    <div className="w-12 h-12 bg-orange-100 dark:bg-orange-900 rounded-full flex items-center justify-center">
+                    <div className="w-12 h-12 bg-orange-100 bg-orange-900 rounded-full flex items-center justify-center">
                       <span className="text-xl">🦴</span>
                     </div>
                   </div>
                 </div>
 
-                <div className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-sm">
+                <div className="bg-white bg-gray-800 rounded-lg p-6 shadow-sm">
                   <div className="flex items-center justify-between">
                     <div>
-                      <p className="text-sm text-gray-600 dark:text-gray-400">Пряжа</p>
+                      <p className="text-sm text-gray-600 text-gray-400">Пряжа</p>
                       <p className="text-2xl font-bold text-purple-600">
                         {walletData.yarn.toLocaleString()}
                       </p>
                     </div>
-                    <div className="w-12 h-12 bg-purple-100 dark:bg-purple-900 rounded-full flex items-center justify-center">
+                    <div className="w-12 h-12 bg-purple-100 bg-purple-900 rounded-full flex items-center justify-center">
                       <span className="text-xl">🧶</span>
                     </div>
                   </div>
@@ -386,8 +386,8 @@ export function WalletScreen({ isGuest = false, onShowAuth }: WalletScreenProps)
               </div>
 
               {/* Quick Actions */}
-              <div className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-sm">
-                <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
+              <div className="bg-white bg-gray-800 rounded-lg p-6 shadow-sm">
+                <h3 className="text-lg font-semibold text-gray-900 text-white mb-4">
                   Быстрые действия
                 </h3>
                 <div className="grid grid-cols-2 gap-4">
@@ -411,16 +411,16 @@ export function WalletScreen({ isGuest = false, onShowAuth }: WalletScreenProps)
 
               {/* Statistics */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-sm">
-                  <h4 className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">
+                <div className="bg-white bg-gray-800 rounded-lg p-6 shadow-sm">
+                  <h4 className="text-sm font-medium text-gray-600 text-gray-400 mb-2">
                     Всего заработано
                   </h4>
                   <p className="text-2xl font-bold text-green-600">
                     {walletData.totalEarned.toLocaleString()} ₽
                   </p>
                 </div>
-                <div className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-sm">
-                  <h4 className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">
+                <div className="bg-white bg-gray-800 rounded-lg p-6 shadow-sm">
+                  <h4 className="text-sm font-medium text-gray-600 text-gray-400 mb-2">
                     Всего потрачено
                   </h4>
                   <p className="text-2xl font-bold text-red-600">
@@ -442,24 +442,24 @@ export function WalletScreen({ isGuest = false, onShowAuth }: WalletScreenProps)
               {transactions.length === 0 ? (
                 <div className="text-center py-12">
                   <History className="h-12 w-12 text-gray-400 mx-auto mb-4" />
-                  <p className="text-gray-600 dark:text-gray-400">Нет транзакций</p>
+                  <p className="text-gray-600 text-gray-400">Нет транзакций</p>
                 </div>
               ) : (
                 transactions.map((transaction) => (
                   <div
                     key={transaction.id}
-                    className="bg-white dark:bg-gray-800 rounded-lg p-4 shadow-sm"
+                    className="bg-white bg-gray-800 rounded-lg p-4 shadow-sm"
                   >
                     <div className="flex items-center justify-between">
                       <div className="flex items-center space-x-3">
-                        <div className="w-10 h-10 bg-gray-100 dark:bg-gray-700 rounded-full flex items-center justify-center">
+                        <div className="w-10 h-10 bg-gray-100 bg-gray-700 rounded-full flex items-center justify-center">
                           {getTransactionIcon(transaction.type)}
                         </div>
                         <div>
-                          <p className="font-medium text-gray-900 dark:text-white">
+                          <p className="font-medium text-gray-900 text-white">
                             {transaction.description}
                           </p>
-                          <p className="text-sm text-gray-600 dark:text-gray-400">
+                          <p className="text-sm text-gray-600 text-gray-400">
                             {transaction.category} • {new Date(transaction.date).toLocaleDateString()}
                           </p>
                         </div>
@@ -490,8 +490,8 @@ export function WalletScreen({ isGuest = false, onShowAuth }: WalletScreenProps)
               exit={{ opacity: 0, y: -20 }}
               className="space-y-4"
             >
-              <div className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-sm">
-                <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
+              <div className="bg-white bg-gray-800 rounded-lg p-6 shadow-sm">
+                <h3 className="text-lg font-semibold text-gray-900 text-white mb-4">
                   Способы заработка
                 </h3>
                 <div className="space-y-4">
@@ -502,12 +502,12 @@ export function WalletScreen({ isGuest = false, onShowAuth }: WalletScreenProps)
                     { title: 'Ежедневный бонус', reward: '5-20 ₽', icon: '🎁', desc: 'За ежедневный вход' },
                     { title: 'Отзывы о партнерах', reward: '15 ₽', icon: '⭐', desc: 'За честный отзыв' }
                   ].map((item, index) => (
-                    <div key={index} className="flex items-center justify-between p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                    <div key={index} className="flex items-center justify-between p-4 bg-gray-50 bg-gray-700 rounded-lg">
                       <div className="flex items-center space-x-3">
                         <span className="text-2xl">{item.icon}</span>
                         <div>
-                          <p className="font-medium text-gray-900 dark:text-white">{item.title}</p>
-                          <p className="text-sm text-gray-600 dark:text-gray-400">{item.desc}</p>
+                          <p className="font-medium text-gray-900 text-white">{item.title}</p>
+                          <p className="text-sm text-gray-600 text-gray-400">{item.desc}</p>
                         </div>
                       </div>
                       <div className="text-right">
@@ -528,14 +528,14 @@ export function WalletScreen({ isGuest = false, onShowAuth }: WalletScreenProps)
               exit={{ opacity: 0, y: -20 }}
               className="space-y-4"
             >
-              <div className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-sm">
-                <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
+              <div className="bg-white bg-gray-800 rounded-lg p-6 shadow-sm">
+                <h3 className="text-lg font-semibold text-gray-900 text-white mb-4">
                   Реферальная программа
                 </h3>
                 <div className="space-y-4">
-                  <div className="p-4 bg-primary-50 dark:bg-primary-900/20 rounded-lg">
+                  <div className="p-4 bg-primary-50 bg-primary-900/20 rounded-lg">
                     <div className="flex items-center justify-between mb-2">
-                      <p className="font-medium text-gray-900 dark:text-white">Ваш реферальный код</p>
+                      <p className="font-medium text-gray-900 text-white">Ваш реферальный код</p>
                       <Button
                         variant="outline"
                         size="sm"
@@ -550,24 +550,24 @@ export function WalletScreen({ isGuest = false, onShowAuth }: WalletScreenProps)
                   </div>
                   
                   <div className="grid grid-cols-2 gap-4">
-                    <div className="text-center p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                    <div className="text-center p-4 bg-gray-50 bg-gray-700 rounded-lg">
                       <p className="text-2xl font-bold text-primary-600">0</p>
-                      <p className="text-sm text-gray-600 dark:text-gray-400">Приглашено друзей</p>
+                      <p className="text-sm text-gray-600 text-gray-400">Приглашено друзей</p>
                     </div>
-                    <div className="text-center p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                    <div className="text-center p-4 bg-gray-50 bg-gray-700 rounded-lg">
                       <p className="text-2xl font-bold text-green-600">{walletData.referralEarnings} ₽</p>
-                      <p className="text-sm text-gray-600 dark:text-gray-400">Заработано с рефералов</p>
+                      <p className="text-sm text-gray-600 text-gray-400">Заработано с рефералов</p>
                     </div>
                   </div>
                   
-                  <div className="p-4 bg-yellow-50 dark:bg-yellow-900/20 rounded-lg">
+                  <div className="p-4 bg-yellow-50 bg-yellow-900/20 rounded-lg">
                     <div className="flex items-start space-x-3">
                       <Info className="h-5 w-5 text-yellow-600 mt-0.5" />
                       <div>
-                        <p className="font-medium text-yellow-800 dark:text-yellow-200">
+                        <p className="font-medium text-yellow-800 text-yellow-200">
                           Как работает реферальная программа
                         </p>
-                        <p className="text-sm text-yellow-700 dark:text-yellow-300 mt-1">
+                        <p className="text-sm text-yellow-700 text-yellow-300 mt-1">
                           Приглашайте друзей по своему коду и получайте 50 ₽ за каждого, 
                           кто зарегистрируется и совершит первую прогулку.
                         </p>

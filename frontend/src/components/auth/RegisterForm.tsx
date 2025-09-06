@@ -74,8 +74,8 @@ export function RegisterForm() {
       className="space-y-6"
     >
       <div className="text-center mb-6">
-        <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Создать аккаунт</h2>
-        <p className="text-gray-600 dark:text-gray-400 mt-2">
+        <h2 className="text-2xl font-bold text-gray-900 text-white">Создать аккаунт</h2>
+        <p className="text-gray-600 text-gray-400 mt-2">
           Присоединяйтесь к сообществу собачников
         </p>
       </div>
@@ -83,7 +83,7 @@ export function RegisterForm() {
       {/* Имя и Фамилия */}
       <div className="grid grid-cols-2 gap-4">
         <div>
-          <label htmlFor="firstName" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+          <label htmlFor="firstName" className="block text-sm font-medium text-gray-700 text-gray-300 mb-2">
             Имя
           </label>
           <div className="relative">
@@ -92,7 +92,7 @@ export function RegisterForm() {
               {...register('firstName')}
               type="text"
               id="firstName"
-              className="w-full pl-10 pr-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent dark:bg-gray-800 dark:text-white"
+              className="w-full pl-10 pr-4 py-3 border border-gray-300 border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-gray-800 text-white"
               placeholder="Ваше имя"
             />
           </div>
@@ -105,7 +105,7 @@ export function RegisterForm() {
         </div>
 
         <div>
-          <label htmlFor="lastName" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+          <label htmlFor="lastName" className="block text-sm font-medium text-gray-700 text-gray-300 mb-2">
             Фамилия
           </label>
           <div className="relative">
@@ -114,7 +114,7 @@ export function RegisterForm() {
               {...register('lastName')}
               type="text"
               id="lastName"
-              className="w-full pl-10 pr-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent dark:bg-gray-800 dark:text-white"
+              className="w-full pl-10 pr-4 py-3 border border-gray-300 border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-gray-800 text-white"
               placeholder="Ваша фамилия"
             />
           </div>
@@ -129,7 +129,7 @@ export function RegisterForm() {
 
       {/* Email */}
       <div>
-        <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+        <label htmlFor="email" className="block text-sm font-medium text-gray-700 text-gray-300 mb-2">
           Email
         </label>
         <div className="relative">
@@ -138,7 +138,7 @@ export function RegisterForm() {
             {...register('email')}
             type="email"
             id="email"
-            className="w-full pl-10 pr-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent dark:bg-gray-800 dark:text-white"
+            className="w-full pl-10 pr-4 py-3 border border-gray-300 border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-gray-800 text-white"
             placeholder="your@email.com"
           />
         </div>
@@ -152,7 +152,7 @@ export function RegisterForm() {
 
       {/* Имя пользователя */}
       <div>
-        <label htmlFor="username" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+        <label htmlFor="username" className="block text-sm font-medium text-gray-700 text-gray-300 mb-2">
           Имя пользователя
         </label>
         <div className="relative">
@@ -161,7 +161,7 @@ export function RegisterForm() {
             {...register('username')}
             type="text"
             id="username"
-            className="w-full pl-10 pr-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent dark:bg-gray-800 dark:text-white"
+            className="w-full pl-10 pr-4 py-3 border border-gray-300 border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-gray-800 text-white"
             placeholder="username"
           />
         </div>
@@ -175,7 +175,7 @@ export function RegisterForm() {
 
       {/* Пароль */}
       <div>
-        <label htmlFor="password" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+        <label htmlFor="password" className="block text-sm font-medium text-gray-700 text-gray-300 mb-2">
           Пароль
         </label>
         <div className="relative">
@@ -184,7 +184,7 @@ export function RegisterForm() {
             {...register('password')}
             type={showPassword ? 'text' : 'password'}
             id="password"
-            className="w-full pl-10 pr-12 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent dark:bg-gray-800 dark:text-white"
+            className="w-full pl-10 pr-12 py-3 border border-gray-300 border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-gray-800 text-white"
             placeholder="Минимум 8 символов"
           />
           <button
@@ -205,7 +205,7 @@ export function RegisterForm() {
 
       {/* Подтверждение пароля */}
       <div>
-        <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+        <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-700 text-gray-300 mb-2">
           Подтвердите пароль
         </label>
         <div className="relative">
@@ -214,7 +214,7 @@ export function RegisterForm() {
             {...register('confirmPassword')}
             type={showConfirmPassword ? 'text' : 'password'}
             id="confirmPassword"
-            className="w-full pl-10 pr-12 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent dark:bg-gray-800 dark:text-white"
+            className="w-full pl-10 pr-12 py-3 border border-gray-300 border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-gray-800 text-white"
             placeholder="Повторите пароль"
           />
           <button
@@ -236,7 +236,7 @@ export function RegisterForm() {
       {/* Дополнительные поля */}
       <div className="grid grid-cols-2 gap-4">
         <div>
-          <label htmlFor="phone" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+          <label htmlFor="phone" className="block text-sm font-medium text-gray-700 text-gray-300 mb-2">
             Телефон (необязательно)
           </label>
           <div className="relative">
@@ -245,14 +245,14 @@ export function RegisterForm() {
               {...register('phone')}
               type="tel"
               id="phone"
-              className="w-full pl-10 pr-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent dark:bg-gray-800 dark:text-white"
+              className="w-full pl-10 pr-4 py-3 border border-gray-300 border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-gray-800 text-white"
               placeholder="+7 (999) 123-45-67"
             />
           </div>
         </div>
 
         <div>
-          <label htmlFor="dateOfBirth" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+          <label htmlFor="dateOfBirth" className="block text-sm font-medium text-gray-700 text-gray-300 mb-2">
             Дата рождения (необязательно)
           </label>
           <div className="relative">
@@ -261,7 +261,7 @@ export function RegisterForm() {
               {...register('dateOfBirth')}
               type="date"
               id="dateOfBirth"
-              className="w-full pl-10 pr-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent dark:bg-gray-800 dark:text-white"
+              className="w-full pl-10 pr-4 py-3 border border-gray-300 border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-gray-800 text-white"
             />
           </div>
         </div>
@@ -279,8 +279,8 @@ export function RegisterForm() {
 
       {/* Ошибка сервера */}
       {error && (
-        <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg p-4">
-          <p className="text-red-600 dark:text-red-400 text-sm flex items-center">
+        <div className="bg-red-50 bg-red-900/20 border border-red-200 border-red-800 rounded-lg p-4">
+          <p className="text-red-600 text-red-400 text-sm flex items-center">
             <AlertCircle className="h-4 w-4 mr-2" />
             {error}
           </p>
@@ -288,7 +288,7 @@ export function RegisterForm() {
       )}
 
       {/* Условия использования */}
-      <p className="text-xs text-gray-500 dark:text-gray-400 text-center">
+      <p className="text-xs text-gray-500 text-gray-400 text-center">
         Регистрируясь, вы соглашаетесь с{' '}
         <a href="/terms" className="text-primary-600 hover:text-primary-700 underline">
           условиями использования

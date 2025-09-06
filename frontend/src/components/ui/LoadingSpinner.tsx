@@ -25,7 +25,7 @@ export function LoadingSpinner({
       <div className="flex flex-col items-center space-y-2">
         <Loader2 className={`${sizeClasses[size]} animate-spin text-primary-600`} />
         {text && (
-          <p className="text-sm text-gray-600 dark:text-gray-400">{text}</p>
+          <p className="text-sm text-gray-600 text-gray-400">{text}</p>
         )}
       </div>
     </div>
@@ -35,7 +35,7 @@ export function LoadingSpinner({
 // Компонент для полноэкранной загрузки
 export function FullScreenLoader({ text = 'Загрузка...' }: { text?: string }) {
   return (
-    <div className="fixed inset-0 bg-white dark:bg-gray-900 flex items-center justify-center z-50">
+    <div className="fixed inset-0 bg-white bg-gray-900 flex items-center justify-center z-50">
       <LoadingSpinner size="xl" text={text} />
     </div>
   );

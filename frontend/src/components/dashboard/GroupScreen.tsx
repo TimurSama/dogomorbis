@@ -323,7 +323,7 @@ export function GroupScreen() {
       <div className="h-full flex items-center justify-center">
         <div className="text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-500 mx-auto mb-4"></div>
-          <p className="text-gray-600 dark:text-gray-400">Загружаем группы...</p>
+          <p className="text-gray-600 text-gray-400">Загружаем группы...</p>
         </div>
       </div>
     );
@@ -360,7 +360,7 @@ export function GroupScreen() {
             placeholder="Поиск групп..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent dark:bg-gray-700 dark:text-white"
+            className="w-full pl-10 pr-4 py-2 border border-gray-300 border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-gray-700 text-white"
           />
         </div>
 
@@ -376,13 +376,13 @@ export function GroupScreen() {
               onClick={() => setActiveTab(tab.id as any)}
               className={`flex-1 flex items-center justify-center space-x-2 py-3 px-4 text-sm font-medium transition-colors ${
                 activeTab === tab.id
-                  ? 'text-primary-600 border-b-2 border-primary-600 bg-primary-50 dark:bg-primary-900/20'
-                  : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white'
+                  ? 'text-primary-600 border-b-2 border-primary-600 bg-primary-50 bg-primary-900/20'
+                  : 'text-gray-600 text-gray-400 hover:text-gray-900 hover:text-white'
               }`}
             >
               <span>{tab.label}</span>
               {tab.count > 0 && (
-                <span className="px-2 py-1 bg-gray-200 dark:bg-gray-700 text-gray-600 dark:text-gray-400 text-xs rounded-full">
+                <span className="px-2 py-1 bg-gray-200 bg-gray-700 text-gray-600 text-gray-400 text-xs rounded-full">
                   {tab.count}
                 </span>
               )}
@@ -397,7 +397,7 @@ export function GroupScreen() {
           {filteredGroups.length === 0 ? (
             <div className="text-center py-12">
               <Users className="h-12 w-12 text-gray-400 mx-auto mb-4" />
-              <p className="text-gray-600 dark:text-gray-400">
+              <p className="text-gray-600 text-gray-400">
                 {activeTab === 'joined' ? 'Вы не состоите ни в одной группе' :
                  activeTab === 'discover' ? 'Нет доступных групп' :
                  'Вы не управляете ни одной группой'}
@@ -409,7 +409,7 @@ export function GroupScreen() {
                 key={group.id}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden"
+                className="bg-white bg-gray-800 rounded-lg shadow-sm border border-gray-200 border-gray-700 overflow-hidden"
               >
                 {/* Group Header */}
                 <div className="relative">
@@ -448,31 +448,31 @@ export function GroupScreen() {
                     <img
                       src={group.avatar || '/api/placeholder/60/60'}
                       alt={group.name}
-                      className="w-16 h-16 rounded-full object-cover -mt-8 border-4 border-white dark:border-gray-800"
+                      className="w-16 h-16 rounded-full object-cover -mt-8 border-4 border-white border-gray-800"
                     />
                     
                     <div className="flex-1">
                       <div className="flex items-center space-x-2 mb-2">
-                        <h3 className="text-lg font-bold text-gray-900 dark:text-white">
+                        <h3 className="text-lg font-bold text-gray-900 text-white">
                           {group.name}
                         </h3>
                         {group.isAdmin && (
-                          <span className="px-2 py-1 bg-red-100 dark:bg-red-900 text-red-800 dark:text-red-200 text-xs rounded-full">
+                          <span className="px-2 py-1 bg-red-100 bg-red-900 text-red-800 text-red-200 text-xs rounded-full">
                             Админ
                           </span>
                         )}
                         {group.isModerator && !group.isAdmin && (
-                          <span className="px-2 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-xs rounded-full">
+                          <span className="px-2 py-1 bg-blue-100 bg-blue-900 text-blue-800 text-blue-200 text-xs rounded-full">
                             Модератор
                           </span>
                         )}
                       </div>
                       
-                      <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">
+                      <p className="text-sm text-gray-600 text-gray-400 mb-2">
                         {group.description}
                       </p>
                       
-                      <div className="flex items-center space-x-4 text-sm text-gray-500 dark:text-gray-400 mb-3">
+                      <div className="flex items-center space-x-4 text-sm text-gray-500 text-gray-400 mb-3">
                         <div className="flex items-center space-x-1">
                           <Users className="h-4 w-4" />
                           <span>{group.membersCount} участников</span>
@@ -494,7 +494,7 @@ export function GroupScreen() {
                         {group.tags.map((tag, index) => (
                           <span
                             key={index}
-                            className="px-2 py-1 bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-400 text-xs rounded-full"
+                            className="px-2 py-1 bg-gray-100 bg-gray-700 text-gray-600 text-gray-400 text-xs rounded-full"
                           >
                             #{tag}
                           </span>
@@ -546,13 +546,13 @@ export function GroupScreen() {
 
                   {/* Recent Posts */}
                   {group.isJoined && group.recentPosts.length > 0 && (
-                    <div className="border-t border-gray-200 dark:border-gray-700 pt-4">
-                      <h4 className="font-semibold text-gray-900 dark:text-white mb-3">
+                    <div className="border-t border-gray-200 border-gray-700 pt-4">
+                      <h4 className="font-semibold text-gray-900 text-white mb-3">
                         Последние посты
                       </h4>
                       <div className="space-y-3">
                         {group.recentPosts.map((post) => (
-                          <div key={post.id} className="bg-gray-50 dark:bg-gray-700 rounded-lg p-3">
+                          <div key={post.id} className="bg-gray-50 bg-gray-700 rounded-lg p-3">
                             <div className="flex items-start space-x-3">
                               <img
                                 src={post.author.avatar || '/api/placeholder/30/30'}
@@ -561,29 +561,29 @@ export function GroupScreen() {
                               />
                               <div className="flex-1">
                                 <div className="flex items-center space-x-2 mb-1">
-                                  <span className="font-medium text-gray-900 dark:text-white text-sm">
+                                  <span className="font-medium text-gray-900 text-white text-sm">
                                     {post.author.name}
                                   </span>
                                   {post.author.isAdmin && (
-                                    <span className="px-1 py-0.5 bg-red-100 dark:bg-red-900 text-red-800 dark:text-red-200 text-xs rounded">
+                                    <span className="px-1 py-0.5 bg-red-100 bg-red-900 text-red-800 text-red-200 text-xs rounded">
                                       Админ
                                     </span>
                                   )}
                                   {post.author.isModerator && !post.author.isAdmin && (
-                                    <span className="px-1 py-0.5 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-xs rounded">
+                                    <span className="px-1 py-0.5 bg-blue-100 bg-blue-900 text-blue-800 text-blue-200 text-xs rounded">
                                       Мод
                                     </span>
                                   )}
                                   {post.isPinned && (
-                                    <span className="px-1 py-0.5 bg-yellow-100 dark:bg-yellow-900 text-yellow-800 dark:text-yellow-200 text-xs rounded">
+                                    <span className="px-1 py-0.5 bg-yellow-100 bg-yellow-900 text-yellow-800 text-yellow-200 text-xs rounded">
                                       Закреплен
                                     </span>
                                   )}
                                 </div>
-                                <p className="text-sm text-gray-700 dark:text-gray-300 mb-2">
+                                <p className="text-sm text-gray-700 text-gray-300 mb-2">
                                   {post.content}
                                 </p>
-                                <div className="flex items-center space-x-4 text-xs text-gray-500 dark:text-gray-400">
+                                <div className="flex items-center space-x-4 text-xs text-gray-500 text-gray-400">
                                   <button
                                     onClick={() => handleLikePost(group.id, post.id)}
                                     className={`flex items-center space-x-1 ${

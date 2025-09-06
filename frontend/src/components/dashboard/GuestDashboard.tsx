@@ -50,7 +50,7 @@ export function GuestDashboard({ onShowAuth }: GuestDashboardProps) {
   };
 
   return (
-    <div className="h-screen flex flex-col bg-gray-50 dark:bg-gray-900 overflow-hidden">
+    <div className="h-screen flex flex-col bg-gray-50 overflow-hidden">
       {/* Верхняя панель */}
       <TopBar 
         onMenuClick={() => setSidebarOpen(true)}

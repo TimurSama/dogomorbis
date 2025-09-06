@@ -45,26 +45,26 @@ export class ErrorBoundary extends Component<Props, State> {
       }
 
       return (
-        <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900 p-4">
-          <div className="max-w-md w-full bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 text-center">
-            <div className="w-16 h-16 bg-red-100 dark:bg-red-900/20 rounded-full flex items-center justify-center mx-auto mb-4">
-              <AlertTriangle className="h-8 w-8 text-red-600 dark:text-red-400" />
+        <div className="min-h-screen flex items-center justify-center bg-gray-50 bg-gray-900 p-4">
+          <div className="max-w-md w-full bg-white bg-gray-800 rounded-lg shadow-lg p-6 text-center">
+            <div className="w-16 h-16 bg-red-100 bg-red-900/20 rounded-full flex items-center justify-center mx-auto mb-4">
+              <AlertTriangle className="h-8 w-8 text-red-600 text-red-400" />
             </div>
             
-            <h1 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
+            <h1 className="text-xl font-semibold text-gray-900 text-white mb-2">
               Что-то пошло не так
             </h1>
             
-            <p className="text-gray-600 dark:text-gray-400 mb-6">
+            <p className="text-gray-600 text-gray-400 mb-6">
               Произошла неожиданная ошибка. Мы уже работаем над её исправлением.
             </p>
 
             {process.env.NODE_ENV === 'development' && this.state.error && (
-              <div className="mb-6 p-4 bg-gray-100 dark:bg-gray-700 rounded-lg text-left">
-                <h3 className="text-sm font-medium text-gray-900 dark:text-white mb-2">
+              <div className="mb-6 p-4 bg-gray-100 bg-gray-700 rounded-lg text-left">
+                <h3 className="text-sm font-medium text-gray-900 text-white mb-2">
                   Детали ошибки:
                 </h3>
-                <pre className="text-xs text-gray-600 dark:text-gray-400 overflow-auto">
+                <pre className="text-xs text-gray-600 text-gray-400 overflow-auto">
                   {this.state.error.toString()}
                 </pre>
               </div>

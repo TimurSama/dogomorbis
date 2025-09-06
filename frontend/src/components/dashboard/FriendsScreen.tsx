@@ -253,7 +253,7 @@ export function FriendsScreen() {
       <div className="h-full flex items-center justify-center">
         <div className="text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-500 mx-auto mb-4"></div>
-          <p className="text-gray-600 dark:text-gray-400">Загружаем друзей...</p>
+          <p className="text-gray-600 text-gray-400">Загружаем друзей...</p>
         </div>
       </div>
     );
@@ -330,7 +330,7 @@ export function FriendsScreen() {
             {friendRequests.length === 0 ? (
               <div className="text-center py-12">
                 <UserPlus className="h-12 w-12 text-gray-400 mx-auto mb-4" />
-                <p className="text-gray-600 dark:text-gray-400">Нет новых заявок в друзья</p>
+                <p className="text-gray-600 text-gray-400">Нет новых заявок в друзья</p>
               </div>
             ) : (
               friendRequests.map((request) => (
@@ -354,7 +354,7 @@ export function FriendsScreen() {
                     
                     <div className="flex-1">
                       <div className="flex items-center space-x-2 mb-2">
-                        <h3 className="font-semibold text-gray-900 dark:text-white">
+                        <h3 className="font-semibold text-gray-900 text-white">
                           {request.user.firstName} {request.user.lastName}
                         </h3>
                         {request.user.isVerified && (
@@ -365,17 +365,17 @@ export function FriendsScreen() {
                         )}
                       </div>
                       
-                      <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">
+                      <p className="text-sm text-gray-600 text-gray-400 mb-2">
                         @{request.user.username}
                       </p>
                       
                       {request.message && (
-                        <p className="text-sm text-gray-700 dark:text-gray-300 mb-3 p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                        <p className="text-sm text-gray-700 text-gray-300 mb-3 p-3 bg-gray-50 bg-gray-700 rounded-lg">
                           "{request.message}"
                         </p>
                       )}
                       
-                      <div className="flex items-center space-x-4 text-sm text-gray-500 dark:text-gray-400 mb-4">
+                      <div className="flex items-center space-x-4 text-sm text-gray-500 text-gray-400 mb-4">
                         <div className="flex items-center space-x-1">
                           <Users className="h-4 w-4" />
                           <span>{request.user.mutualFriends} общих друзей</span>
@@ -418,7 +418,7 @@ export function FriendsScreen() {
             {filteredFriends.length === 0 ? (
               <div className="text-center py-12">
                 <Users className="h-12 w-12 text-gray-400 mx-auto mb-4" />
-                <p className="text-gray-600 dark:text-gray-400">
+                <p className="text-gray-600 text-gray-400">
                   {activeTab === 'online' ? 'Нет друзей онлайн' :
                    activeTab === 'nearby' ? 'Нет друзей рядом' :
                    'Друзья не найдены'}
@@ -447,7 +447,7 @@ export function FriendsScreen() {
                     <div className="flex-1">
                       <div className="flex items-center justify-between mb-2">
                         <div className="flex items-center space-x-2">
-                          <h3 className="font-semibold text-gray-900 dark:text-white">
+                          <h3 className="font-semibold text-gray-900 text-white">
                             {friend.firstName} {friend.lastName}
                           </h3>
                           {friend.isVerified && (
@@ -474,17 +474,17 @@ export function FriendsScreen() {
                         </div>
                       </div>
                       
-                      <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">
+                      <p className="text-sm text-gray-600 text-gray-400 mb-2">
                         @{friend.username}
                       </p>
                       
                       {friend.bio && (
-                        <p className="text-sm text-gray-700 dark:text-gray-300 mb-3">
+                        <p className="text-sm text-gray-700 text-gray-300 mb-3">
                           {friend.bio}
                         </p>
                       )}
                       
-                      <div className="flex items-center space-x-4 text-sm text-gray-500 dark:text-gray-400 mb-3">
+                      <div className="flex items-center space-x-4 text-sm text-gray-500 text-gray-400 mb-3">
                         <div className="flex items-center space-x-1">
                           <MapPin className="h-4 w-4" />
                           <span>{friend.location}</span>
@@ -501,7 +501,7 @@ export function FriendsScreen() {
                       
                       {/* Dogs */}
                       <div className="flex items-center space-x-2 mb-3">
-                        <span className="text-sm text-gray-600 dark:text-gray-400">Собаки:</span>
+                        <span className="text-sm text-gray-600 text-gray-400">Собаки:</span>
                         <div className="flex space-x-1">
                           {friend.dogs.map((dog, index) => (
                             <div key={index} className="flex items-center space-x-1">
@@ -510,7 +510,7 @@ export function FriendsScreen() {
                                 alt={dog.name}
                                 className="w-5 h-5 rounded-full object-cover"
                               />
-                              <span className="text-xs text-gray-600 dark:text-gray-400">
+                              <span className="text-xs text-gray-600 text-gray-400">
                                 {dog.name}
                               </span>
                             </div>
@@ -523,7 +523,7 @@ export function FriendsScreen() {
                         {friend.interests.slice(0, 3).map((interest, index) => (
                           <span
                             key={index}
-                            className="px-2 py-1 bg-primary-100 dark:bg-primary-900 text-primary-800 dark:text-primary-200 text-xs rounded-full"
+                            className="px-2 py-1 bg-primary-100 bg-primary-900 text-primary-800 text-primary-200 text-xs rounded-full"
                           >
                             {interest}
                           </span>

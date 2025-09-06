@@ -215,7 +215,7 @@ export function Sidebar({ isOpen, onClose, onScreenChange, activeScreen, isGuest
                 </div>
               ) : (
                 <div className="flex items-center space-x-3">
-                  <div className="w-12 h-12 bg-primary-100 dark:bg-primary-900 rounded-full flex items-center justify-center">
+                  <div className="w-12 h-12 bg-primary-100 bg-primary-900 rounded-full flex items-center justify-center">
                     {user?.avatar ? (
                       <img
                         src={user.avatar}
@@ -236,7 +236,7 @@ export function Sidebar({ isOpen, onClose, onScreenChange, activeScreen, isGuest
                     {user?.isPremium && (
                       <div className="flex items-center mt-1">
                         <Crown className="h-3 w-3 text-yellow-500 mr-1" />
-                        <span className="text-xs text-yellow-600 dark:text-yellow-400">
+                        <span className="text-xs text-yellow-600 text-yellow-400">
                           Premium
                         </span>
                       </div>
@@ -329,7 +329,7 @@ export function Sidebar({ isOpen, onClose, onScreenChange, activeScreen, isGuest
             </div>
 
             {/* Footer */}
-            <div className="mt-auto p-4 border-t border-gray-200 dark:border-gray-700">
+            <div className="mt-auto p-4 border-t border-gray-200 border-gray-700">
               <div className="space-y-2">
                 <Button
                   variant="ghost"

@@ -219,7 +219,7 @@ export function ShopScreen() {
       <div className="h-full flex items-center justify-center">
         <div className="text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-500 mx-auto mb-4"></div>
-          <p className="text-gray-600 dark:text-gray-400">Загружаем магазин...</p>
+          <p className="text-gray-600 text-gray-400">Загружаем магазин...</p>
         </div>
       </div>
     );
@@ -255,7 +255,7 @@ export function ShopScreen() {
               placeholder="Поиск товаров..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent dark:bg-gray-700 dark:text-white"
+              className="w-full pl-10 pr-4 py-2 border border-gray-300 border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-gray-700 text-white"
             />
           </div>
           <Button
@@ -273,7 +273,7 @@ export function ShopScreen() {
           <select
             value={sortBy}
             onChange={(e) => setSortBy(e.target.value as any)}
-            className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent dark:bg-gray-700 dark:text-white"
+            className="px-3 py-2 border border-gray-300 border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-gray-700 text-white"
           >
             <option value="popular">Популярные</option>
             <option value="price-low">Цена: по возрастанию</option>
@@ -286,9 +286,9 @@ export function ShopScreen() {
 
       <div className="flex-1 flex overflow-hidden">
         {/* Categories Sidebar */}
-        <div className="w-64 bg-white dark:bg-gray-800 border-r border-gray-200 dark:border-gray-700 flex-shrink-0 overflow-y-auto">
+        <div className="w-64 bg-white bg-gray-800 border-r border-gray-200 border-gray-700 flex-shrink-0 overflow-y-auto">
           <div className="p-4">
-            <h3 className="text-sm font-medium text-gray-900 dark:text-white mb-3">Категории</h3>
+            <h3 className="text-sm font-medium text-gray-900 text-white mb-3">Категории</h3>
             <div className="space-y-1">
               {categories.map((category) => (
                 <button
@@ -296,15 +296,15 @@ export function ShopScreen() {
                   onClick={() => setSelectedCategory(category.id)}
                   className={`w-full flex items-center justify-between p-3 rounded-lg text-left transition-colors ${
                     selectedCategory === category.id
-                      ? 'bg-primary-50 dark:bg-primary-900/20 text-primary-600'
-                      : 'text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700'
+                      ? 'bg-primary-50 bg-primary-900/20 text-primary-600'
+                      : 'text-gray-700 text-gray-300 hover:bg-gray-50 hover:bg-gray-700'
                   }`}
                 >
                   <div className="flex items-center space-x-3">
                     <span className="text-lg">{category.icon}</span>
                     <span className="font-medium">{category.name}</span>
                   </div>
-                  <span className="text-sm text-gray-500 dark:text-gray-400">
+                  <span className="text-sm text-gray-500 text-gray-400">
                     {category.count}
                   </span>
                 </button>
@@ -321,7 +321,7 @@ export function ShopScreen() {
                 key={product.id}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden hover:shadow-lg transition-shadow"
+                className="bg-white bg-gray-800 rounded-lg shadow-sm border border-gray-200 border-gray-700 overflow-hidden hover:shadow-lg transition-shadow"
               >
                 {/* Product Image */}
                 <div className="relative">
@@ -354,7 +354,7 @@ export function ShopScreen() {
                   {/* Favorite Button */}
                   <button
                     onClick={() => handleToggleFavorite(product.id)}
-                    className="absolute top-2 right-2 p-2 bg-white/80 dark:bg-gray-800/80 rounded-full hover:bg-white dark:hover:bg-gray-800 transition-colors"
+                    className="absolute top-2 right-2 p-2 bg-white/80 bg-gray-800/80 rounded-full hover:bg-white hover:bg-gray-800 transition-colors"
                   >
                     <Heart 
                       className={`h-4 w-4 ${
@@ -369,12 +369,12 @@ export function ShopScreen() {
                 {/* Product Info */}
                 <div className="p-4">
                   <div className="flex items-start justify-between mb-2">
-                    <h3 className="font-semibold text-gray-900 dark:text-white line-clamp-2">
+                    <h3 className="font-semibold text-gray-900 text-white line-clamp-2">
                       {product.name}
                     </h3>
                   </div>
 
-                  <p className="text-sm text-gray-600 dark:text-gray-400 mb-3 line-clamp-2">
+                  <p className="text-sm text-gray-600 text-gray-400 mb-3 line-clamp-2">
                     {product.description}
                   </p>
 
@@ -392,7 +392,7 @@ export function ShopScreen() {
                     {product.tags.slice(0, 2).map((tag, index) => (
                       <span
                         key={index}
-                        className="px-2 py-1 bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-400 text-xs rounded-full"
+                        className="px-2 py-1 bg-gray-100 bg-gray-700 text-gray-600 text-gray-400 text-xs rounded-full"
                       >
                         {tag}
                       </span>
@@ -406,7 +406,7 @@ export function ShopScreen() {
                       alt={product.seller.name}
                       className="w-6 h-6 rounded-full"
                     />
-                    <span className="text-sm text-gray-600 dark:text-gray-400">
+                    <span className="text-sm text-gray-600 text-gray-400">
                       {product.seller.name}
                     </span>
                     {product.seller.isVerified && (
@@ -417,7 +417,7 @@ export function ShopScreen() {
                   {/* Price */}
                   <div className="flex items-center justify-between mb-4">
                     <div className="flex items-center space-x-2">
-                      <span className="text-lg font-bold text-gray-900 dark:text-white">
+                      <span className="text-lg font-bold text-gray-900 text-white">
                         {product.price.toLocaleString()} ₽
                       </span>
                       {product.originalPrice && (
@@ -429,7 +429,7 @@ export function ShopScreen() {
                   </div>
 
                   {/* Delivery Info */}
-                  <div className="flex items-center justify-between text-sm text-gray-600 dark:text-gray-400 mb-4">
+                  <div className="flex items-center justify-between text-sm text-gray-600 text-gray-400 mb-4">
                     <div className="flex items-center space-x-1">
                       <Truck className="h-4 w-4" />
                       <span>{product.delivery.time}</span>
@@ -462,7 +462,7 @@ export function ShopScreen() {
           {sortedProducts.length === 0 && (
             <div className="text-center py-12">
               <ShoppingCart className="h-12 w-12 text-gray-400 mx-auto mb-4" />
-              <p className="text-gray-600 dark:text-gray-400">Товары не найдены</p>
+              <p className="text-gray-600 text-gray-400">Товары не найдены</p>
             </div>
           )}
         </div>

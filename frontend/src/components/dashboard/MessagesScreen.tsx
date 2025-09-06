@@ -425,7 +425,7 @@ export function MessagesScreen() {
       <div className="h-full flex items-center justify-center">
         <div className="text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-500 mx-auto mb-4"></div>
-          <p className="text-gray-600 dark:text-gray-400">Загружаем сообщения...</p>
+          <p className="text-gray-600 text-gray-400">Загружаем сообщения...</p>
         </div>
       </div>
     );
@@ -457,7 +457,7 @@ export function MessagesScreen() {
               placeholder="Поиск сообщений..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent dark:bg-gray-700 dark:text-white"
+              className="w-full pl-10 pr-4 py-2 border border-gray-300 border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-gray-700 text-white"
             />
           </div>
         </div>
@@ -467,7 +467,7 @@ export function MessagesScreen() {
           {filteredChats.length === 0 ? (
             <div className="text-center py-12">
               <MessageCircle className="h-12 w-12 text-gray-400 mx-auto mb-4" />
-              <p className="text-gray-600 dark:text-gray-400">Нет чатов</p>
+              <p className="text-gray-600 text-gray-400">Нет чатов</p>
             </div>
           ) : (
             <div className="space-y-1 p-2">
@@ -479,8 +479,8 @@ export function MessagesScreen() {
                   onClick={() => setSelectedChat(chat)}
                   className={`p-3 rounded-lg cursor-pointer transition-colors ${
                     selectedChat?.id === chat.id
-                      ? 'bg-primary-100 dark:bg-primary-900/20 border border-primary-200 dark:border-primary-800'
-                      : 'hover:bg-gray-100 dark:hover:bg-gray-700'
+                      ? 'bg-primary-100 bg-primary-900/20 border border-primary-200 border-primary-800'
+                      : 'hover:bg-gray-100 hover:bg-gray-700'
                   }`}
                 >
                   <div className="flex items-start space-x-3">
@@ -491,18 +491,18 @@ export function MessagesScreen() {
                         className="w-12 h-12 rounded-full object-cover"
                       />
                       {chat.type === 'group' && (
-                        <div className="absolute -bottom-1 -right-1 w-4 h-4 bg-blue-500 rounded-full border-2 border-white dark:border-gray-800 flex items-center justify-center">
+                        <div className="absolute -bottom-1 -right-1 w-4 h-4 bg-blue-500 rounded-full border-2 border-white border-gray-800 flex items-center justify-center">
                           <Users className="h-2 w-2 text-white" />
                         </div>
                       )}
                       {chat.participants.some(p => p.isOnline) && (
-                        <div className="absolute -bottom-1 -right-1 w-4 h-4 bg-green-500 rounded-full border-2 border-white dark:border-gray-800"></div>
+                        <div className="absolute -bottom-1 -right-1 w-4 h-4 bg-green-500 rounded-full border-2 border-white border-gray-800"></div>
                       )}
                     </div>
                     
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center justify-between mb-1">
-                        <h3 className="font-semibold text-gray-900 dark:text-white truncate">
+                        <h3 className="font-semibold text-gray-900 text-white truncate">
                           {chat.name}
                         </h3>
                         <div className="flex items-center space-x-1">
@@ -521,13 +521,13 @@ export function MessagesScreen() {
                       </div>
                       
                       {chat.lastMessage && (
-                        <p className="text-sm text-gray-600 dark:text-gray-400 truncate">
+                        <p className="text-sm text-gray-600 text-gray-400 truncate">
                           {chat.lastMessage.senderName}: {chat.lastMessage.content}
                         </p>
                       )}
                       
                       <div className="flex items-center justify-between mt-1">
-                        <span className="text-xs text-gray-500 dark:text-gray-400">
+                        <span className="text-xs text-gray-500 text-gray-400">
                           {chat.lastMessage ? formatTime(chat.lastMessage.timestamp) : formatDate(chat.createdAt)}
                         </span>
                         {chat.lastMessage && (
@@ -553,7 +553,7 @@ export function MessagesScreen() {
       {selectedChat ? (
         <div className="flex-1 flex flex-col">
           {/* Chat Header */}
-          <div className="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 p-4">
+          <div className="bg-white bg-gray-800 border-b border-gray-200 border-gray-700 p-4">
             <div className="flex items-center justify-between">
               <div className="flex items-center space-x-3">
                 <img
@@ -562,16 +562,16 @@ export function MessagesScreen() {
                   className="w-10 h-10 rounded-full object-cover"
                 />
                 <div>
-                  <h2 className="font-semibold text-gray-900 dark:text-white">
+                  <h2 className="font-semibold text-gray-900 text-white">
                     {selectedChat.name}
                   </h2>
                   {selectedChat.type === 'private' && (
-                    <p className="text-sm text-gray-600 dark:text-gray-400">
+                    <p className="text-sm text-gray-600 text-gray-400">
                       {selectedChat.participants[0]?.isOnline ? 'В сети' : `Был(а) в сети ${selectedChat.participants[0]?.lastSeen}`}
                     </p>
                   )}
                   {selectedChat.type === 'group' && (
-                    <p className="text-sm text-gray-600 dark:text-gray-400">
+                    <p className="text-sm text-gray-600 text-gray-400">
                       {selectedChat.participants.length} участников
                     </p>
                   )}
@@ -613,12 +613,12 @@ export function MessagesScreen() {
                   <div className={`rounded-lg px-3 py-2 ${
                     message.senderId === 'user'
                       ? 'bg-primary-500 text-white'
-                      : 'bg-gray-200 dark:bg-gray-700 text-gray-900 dark:text-white'
+                      : 'bg-gray-200 bg-gray-700 text-gray-900 text-white'
                   }`}>
                     <p className="text-sm">{message.content}</p>
                     <div className="flex items-center justify-between mt-1">
                       <span className={`text-xs ${
-                        message.senderId === 'user' ? 'text-primary-100' : 'text-gray-500 dark:text-gray-400'
+                        message.senderId === 'user' ? 'text-primary-100' : 'text-gray-500 text-gray-400'
                       }`}>
                         {formatTime(message.timestamp)}
                       </span>
@@ -640,7 +640,7 @@ export function MessagesScreen() {
           </div>
 
           {/* Message Input */}
-          <div className="bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700 p-4">
+          <div className="bg-white bg-gray-800 border-t border-gray-200 border-gray-700 p-4">
             <div className="flex items-end space-x-2">
               <Button
                 variant="ghost"
@@ -656,7 +656,7 @@ export function MessagesScreen() {
                   onChange={(e) => setMessageInput(e.target.value)}
                   onKeyPress={handleKeyPress}
                   placeholder="Напишите сообщение..."
-                  className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent dark:bg-gray-700 dark:text-white resize-none"
+                  className="w-full px-3 py-2 border border-gray-300 border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-gray-700 text-white resize-none"
                   rows={1}
                 />
               </div>
@@ -709,10 +709,10 @@ export function MessagesScreen() {
         <div className="flex-1 flex items-center justify-center">
           <div className="text-center">
             <MessageCircle className="h-16 w-16 text-gray-400 mx-auto mb-4" />
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
+            <h3 className="text-lg font-semibold text-gray-900 text-white mb-2">
               Выберите чат
             </h3>
-            <p className="text-gray-600 dark:text-gray-400">
+            <p className="text-gray-600 text-gray-400">
               Начните общение с друзьями или группами
             </p>
           </div>

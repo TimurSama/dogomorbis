@@ -437,10 +437,10 @@ export function FeedScreen() {
             >
               <div className={`w-16 h-16 rounded-full border-2 ${
                 story.isViewed 
-                  ? 'border-gray-300 dark:border-gray-600' 
+                  ? 'border-gray-300 border-gray-600' 
                   : 'border-primary-600'
               } p-0.5 relative`}>
-                <div className="w-full h-full rounded-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center">
+                <div className="w-full h-full rounded-full bg-gray-200 bg-gray-700 flex items-center justify-center">
                   {story.userAvatar ? (
                     <img
                       src={story.userAvatar}
@@ -455,7 +455,7 @@ export function FeedScreen() {
                   <div className="absolute -top-1 -right-1 w-4 h-4 bg-red-500 rounded-full border-2 border-white animate-pulse"></div>
                 )}
               </div>
-              <p className="text-xs text-gray-600 dark:text-gray-400 mt-1 truncate w-16">
+              <p className="text-xs text-gray-600 text-gray-400 mt-1 truncate w-16">
                 {story.username}
               </p>
             </motion.div>
@@ -464,7 +464,7 @@ export function FeedScreen() {
       </div>
 
       {/* Filters */}
-      <div className="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 p-4 flex-shrink-0">
+      <div className="bg-white bg-gray-800 border-b border-gray-200 border-gray-700 p-4 flex-shrink-0">
         <div className="flex space-x-2 overflow-x-auto">
           {[
             { id: 'all', label: 'Все', icon: <Image className="h-4 w-4" /> },
@@ -480,7 +480,7 @@ export function FeedScreen() {
               className={`flex items-center space-x-2 px-4 py-2 rounded-full text-sm font-medium transition-colors whitespace-nowrap ${
                 activeFilter === filter.id
                   ? 'bg-primary-600 text-white'
-                  : 'bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
+                  : 'bg-gray-100 bg-gray-700 text-gray-700 text-gray-300 hover:bg-gray-200 hover:bg-gray-600'
               }`}
             >
               {filter.icon}
@@ -498,13 +498,13 @@ export function FeedScreen() {
               key={post.id}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              className="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden"
+              className="bg-white bg-gray-800 rounded-2xl shadow-sm border border-gray-200 border-gray-700 overflow-hidden"
             >
               {/* Post Header */}
-              <div className="p-4 border-b border-gray-100 dark:border-gray-700">
+              <div className="p-4 border-b border-gray-100 border-gray-700">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center space-x-3">
-                    <div className="w-10 h-10 rounded-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center">
+                    <div className="w-10 h-10 rounded-full bg-gray-200 bg-gray-700 flex items-center justify-center">
                       {post.author.avatar ? (
                         <img
                           src={post.author.avatar}
@@ -517,7 +517,7 @@ export function FeedScreen() {
                     </div>
                     <div>
                       <div className="flex items-center space-x-2">
-                        <p className="font-semibold text-gray-900 dark:text-white">
+                        <p className="font-semibold text-gray-900 text-white">
                           {post.author.username}
                         </p>
                         {post.author.isVerified && (
@@ -531,7 +531,7 @@ export function FeedScreen() {
                           </span>
                         )}
                       </div>
-                      <div className="flex items-center space-x-2 text-sm text-gray-500 dark:text-gray-400">
+                      <div className="flex items-center space-x-2 text-sm text-gray-500 text-gray-400">
                         <Clock className="h-3 w-3" />
                         <span>{formatTimeAgo(post.createdAt)}</span>
                         {post.location && (
@@ -553,7 +553,7 @@ export function FeedScreen() {
               {/* Post Content */}
               <div className="p-4">
                 {post.content.text && (
-                  <p className="text-gray-900 dark:text-white mb-4 whitespace-pre-wrap">
+                  <p className="text-gray-900 text-white mb-4 whitespace-pre-wrap">
                     {post.content.text}
                   </p>
                 )}
@@ -588,10 +588,10 @@ export function FeedScreen() {
                 {/* Video */}
                 {post.content.video && (
                   <div className="relative mb-4">
-                    <div className="w-full h-64 bg-gray-200 dark:bg-gray-700 rounded-lg flex items-center justify-center">
+                    <div className="w-full h-64 bg-gray-200 bg-gray-700 rounded-lg flex items-center justify-center">
                       <div className="text-center">
                         <Play className="h-12 w-12 text-gray-400 mx-auto mb-2" />
-                        <p className="text-gray-600 dark:text-gray-400">Видео</p>
+                        <p className="text-gray-600 text-gray-400">Видео</p>
                       </div>
                     </div>
                   </div>
@@ -599,8 +599,8 @@ export function FeedScreen() {
 
                 {/* Poll */}
                 {post.content.poll && (
-                  <div className="mb-4 p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
-                    <h4 className="font-semibold text-gray-900 dark:text-white mb-3">
+                  <div className="mb-4 p-4 bg-gray-50 bg-gray-700 rounded-lg">
+                    <h4 className="font-semibold text-gray-900 text-white mb-3">
                       {post.content.poll.question}
                     </h4>
                     <div className="space-y-2">
@@ -617,19 +617,19 @@ export function FeedScreen() {
                             disabled={!!post.content.poll!.userVote}
                             className={`w-full p-3 rounded-lg border-2 transition-colors text-left ${
                               isUserVote 
-                                ? 'border-primary-500 bg-primary-50 dark:bg-primary-900/20' 
-                                : 'border-gray-200 dark:border-gray-600 hover:border-gray-300 dark:hover:border-gray-500'
+                                ? 'border-primary-500 bg-primary-50 bg-primary-900/20' 
+                                : 'border-gray-200 border-gray-600 hover:border-gray-300 hover:border-gray-500'
                             } ${post.content.poll!.userVote ? 'cursor-default' : 'cursor-pointer'}`}
                           >
                             <div className="flex items-center justify-between mb-1">
-                              <span className="text-sm font-medium text-gray-900 dark:text-white">
+                              <span className="text-sm font-medium text-gray-900 text-white">
                                 {option.text}
                               </span>
-                              <span className="text-sm text-gray-500 dark:text-gray-400">
+                              <span className="text-sm text-gray-500 text-gray-400">
                                 {option.votes} ({percentage.toFixed(1)}%)
                               </span>
                             </div>
-                            <div className="w-full bg-gray-200 dark:bg-gray-600 rounded-full h-2">
+                            <div className="w-full bg-gray-200 bg-gray-600 rounded-full h-2">
                               <div 
                                 className="bg-primary-600 h-2 rounded-full transition-all duration-300"
                                 style={{ width: `${percentage}%` }}
@@ -639,7 +639,7 @@ export function FeedScreen() {
                         );
                       })}
                     </div>
-                    <p className="text-sm text-gray-500 dark:text-gray-400 mt-2">
+                    <p className="text-sm text-gray-500 text-gray-400 mt-2">
                       Всего голосов: {post.content.poll.totalVotes}
                     </p>
                   </div>
@@ -647,7 +647,7 @@ export function FeedScreen() {
 
                 {/* Ad */}
                 {post.content.ad && (
-                  <div className="mb-4 border border-orange-200 dark:border-orange-800 rounded-lg overflow-hidden">
+                  <div className="mb-4 border border-orange-200 border-orange-800 rounded-lg overflow-hidden">
                     <div className="relative">
                       <img
                         src={post.content.ad.image}
@@ -661,10 +661,10 @@ export function FeedScreen() {
                       )}
                     </div>
                     <div className="p-4">
-                      <h4 className="font-semibold text-gray-900 dark:text-white mb-2">
+                      <h4 className="font-semibold text-gray-900 text-white mb-2">
                         {post.content.ad.title}
                       </h4>
-                      <p className="text-sm text-gray-600 dark:text-gray-400 mb-3">
+                      <p className="text-sm text-gray-600 text-gray-400 mb-3">
                         {post.content.ad.description}
                       </p>
                       <div className="flex items-center justify-between">
@@ -682,25 +682,25 @@ export function FeedScreen() {
 
                 {/* DAO */}
                 {post.content.dao && (
-                  <div className="mb-4 p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg border border-blue-200 dark:border-blue-800">
+                  <div className="mb-4 p-4 bg-blue-50 bg-blue-900/20 rounded-lg border border-blue-200 border-blue-800">
                     <div className="flex items-center space-x-2 mb-3">
                       <Award className="h-5 w-5 text-blue-600" />
-                      <span className="text-sm font-medium text-blue-800 dark:text-blue-200">
+                      <span className="text-sm font-medium text-blue-800 text-blue-200">
                         DAO Голосование
                       </span>
                     </div>
-                    <h4 className="font-semibold text-gray-900 dark:text-white mb-2">
+                    <h4 className="font-semibold text-gray-900 text-white mb-2">
                       {post.content.dao.title}
                     </h4>
-                    <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
+                    <p className="text-sm text-gray-600 text-gray-400 mb-4">
                       {post.content.dao.description}
                     </p>
                     <div className="space-y-3">
                       <div className="flex items-center justify-between">
-                        <span className="text-sm text-gray-700 dark:text-gray-300">
+                        <span className="text-sm text-gray-700 text-gray-300">
                           За: {post.content.dao.votes.for}
                         </span>
-                        <span className="text-sm text-gray-700 dark:text-gray-300">
+                        <span className="text-sm text-gray-700 text-gray-300">
                           Против: {post.content.dao.votes.against}
                         </span>
                       </div>
@@ -725,7 +725,7 @@ export function FeedScreen() {
                         </div>
                       ) : (
                         <div className="text-center">
-                          <span className="text-sm text-gray-600 dark:text-gray-400">
+                          <span className="text-sm text-gray-600 text-gray-400">
                             Вы проголосовали: {post.content.dao.userVote === 'for' ? 'За' : 'Против'}
                           </span>
                         </div>
@@ -736,7 +736,7 @@ export function FeedScreen() {
 
                 {/* Partner */}
                 {post.content.partner && (
-                  <div className="mb-4 p-4 bg-green-50 dark:bg-green-900/20 rounded-lg border border-green-200 dark:border-green-800">
+                  <div className="mb-4 p-4 bg-green-50 bg-green-900/20 rounded-lg border border-green-200 border-green-800">
                     <div className="flex items-center space-x-3">
                       <img
                         src={post.content.partner.image}
@@ -744,7 +744,7 @@ export function FeedScreen() {
                         className="w-16 h-16 rounded-lg object-cover"
                       />
                       <div className="flex-1">
-                        <h4 className="font-semibold text-gray-900 dark:text-white">
+                        <h4 className="font-semibold text-gray-900 text-white">
                           {post.content.partner.name}
                         </h4>
                         <div className="flex items-center space-x-2 mb-2">
@@ -760,7 +760,7 @@ export function FeedScreen() {
                         </div>
                         <div className="space-y-1">
                           {post.content.partner.offers.map((offer, index) => (
-                            <p key={index} className="text-sm text-green-700 dark:text-green-300">
+                            <p key={index} className="text-sm text-green-700 text-green-300">
                               • {offer}
                             </p>
                           ))}
@@ -776,7 +776,7 @@ export function FeedScreen() {
                     {post.tags.map((tag, index) => (
                       <span
                         key={index}
-                        className="px-2 py-1 bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-400 text-xs rounded-full"
+                        className="px-2 py-1 bg-gray-100 bg-gray-700 text-gray-600 text-gray-400 text-xs rounded-full"
                       >
                         #{tag}
                       </span>
@@ -786,23 +786,23 @@ export function FeedScreen() {
               </div>
 
               {/* Post Actions */}
-              <div className="px-4 py-3 border-t border-gray-100 dark:border-gray-700">
+              <div className="px-4 py-3 border-t border-gray-100 border-gray-700">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center space-x-6">
                     <button
                       onClick={() => handleLike(post.id)}
                       className={`flex items-center space-x-2 transition-colors ${
-                        post.isLiked ? 'text-red-600' : 'text-gray-600 dark:text-gray-400 hover:text-red-600'
+                        post.isLiked ? 'text-red-600' : 'text-gray-600 text-gray-400 hover:text-red-600'
                       }`}
                     >
                       <Heart className={`h-5 w-5 ${post.isLiked ? 'fill-current' : ''}`} />
                       <span className="text-sm font-medium">{post.likes}</span>
                     </button>
-                    <button className="flex items-center space-x-2 text-gray-600 dark:text-gray-400 hover:text-blue-600 transition-colors">
+                    <button className="flex items-center space-x-2 text-gray-600 text-gray-400 hover:text-blue-600 transition-colors">
                       <MessageCircle className="h-5 w-5" />
                       <span className="text-sm font-medium">{post.comments}</span>
                     </button>
-                    <button className="flex items-center space-x-2 text-gray-600 dark:text-gray-400 hover:text-green-600 transition-colors">
+                    <button className="flex items-center space-x-2 text-gray-600 text-gray-400 hover:text-green-600 transition-colors">
                       <Share className="h-5 w-5" />
                       <span className="text-sm font-medium">{post.shares}</span>
                     </button>
@@ -810,7 +810,7 @@ export function FeedScreen() {
                   <button
                     onClick={() => handleBookmark(post.id)}
                     className={`transition-colors ${
-                      post.isBookmarked ? 'text-yellow-600' : 'text-gray-600 dark:text-gray-400 hover:text-yellow-600'
+                      post.isBookmarked ? 'text-yellow-600' : 'text-gray-600 text-gray-400 hover:text-yellow-600'
                     }`}
                   >
                     <Bookmark className={`h-5 w-5 ${post.isBookmarked ? 'fill-current' : ''}`} />

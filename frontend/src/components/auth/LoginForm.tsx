@@ -62,7 +62,7 @@ export function LoginForm() {
     >
       {/* Email поле */}
       <div>
-        <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+        <label htmlFor="email" className="block text-sm font-medium text-gray-700 text-gray-300 mb-2">
           Email
         </label>
         <div className="relative">
@@ -73,7 +73,7 @@ export function LoginForm() {
             {...register('email')}
             type="email"
             id="email"
-            className={`block w-full pl-10 pr-3 py-2 border rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-800 dark:border-gray-600 dark:text-white dark:placeholder-gray-400 ${
+            className={`block w-full pl-10 pr-3 py-2 border rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 bg-gray-800 border-gray-600 text-white placeholder-gray-400 ${
               errors.email ? 'border-error-500' : 'border-gray-300'
             }`}
             placeholder="Введите ваш email"
@@ -83,7 +83,7 @@ export function LoginForm() {
           <motion.p
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
-            className="mt-1 text-sm text-error-600 dark:text-error-400 flex items-center"
+            className="mt-1 text-sm text-error-600 text-error-400 flex items-center"
           >
             <AlertCircle className="w-4 h-4 mr-1" />
             {errors.email.message}
@@ -93,7 +93,7 @@ export function LoginForm() {
 
       {/* Пароль поле */}
       <div>
-        <label htmlFor="password" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+        <label htmlFor="password" className="block text-sm font-medium text-gray-700 text-gray-300 mb-2">
           Пароль
         </label>
         <div className="relative">
@@ -104,7 +104,7 @@ export function LoginForm() {
             {...register('password')}
             type={showPassword ? 'text' : 'password'}
             id="password"
-            className={`block w-full pl-10 pr-10 py-2 border rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-800 dark:border-gray-600 dark:text-white dark:placeholder-gray-400 ${
+            className={`block w-full pl-10 pr-10 py-2 border rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 bg-gray-800 border-gray-600 text-white placeholder-gray-400 ${
               errors.password ? 'border-error-500' : 'border-gray-300'
             }`}
             placeholder="Введите ваш пароль"
@@ -125,7 +125,7 @@ export function LoginForm() {
           <motion.p
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
-            className="mt-1 text-sm text-error-600 dark:text-error-400 flex items-center"
+            className="mt-1 text-sm text-error-600 text-error-400 flex items-center"
           >
             <AlertCircle className="w-4 h-4 mr-1" />
             {errors.password.message}
@@ -142,7 +142,7 @@ export function LoginForm() {
             type="checkbox"
             className="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 rounded"
           />
-          <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-700 dark:text-gray-300">
+          <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-700 text-gray-300">
             Запомнить меня
           </label>
         </div>
@@ -150,7 +150,7 @@ export function LoginForm() {
         <div className="text-sm">
           <button
             type="button"
-            className="text-primary-600 dark:text-primary-400 hover:text-primary-500 dark:hover:text-primary-300 font-medium"
+            className="text-primary-600 text-primary-400 hover:text-primary-500 hover:text-primary-300 font-medium"
           >
             Забыли пароль?
           </button>
@@ -173,12 +173,12 @@ export function LoginForm() {
         <motion.div
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
-          className="bg-error-50 dark:bg-error-900/20 border border-error-200 dark:border-error-800 rounded-lg p-4"
+          className="bg-error-50 bg-error-900/20 border border-error-200 border-error-800 rounded-lg p-4"
         >
           <div className="flex">
             <AlertCircle className="h-5 w-5 text-error-400" />
             <div className="ml-3">
-              <p className="text-sm text-error-800 dark:text-error-200">
+              <p className="text-sm text-error-800 text-error-200">
                 {error}
               </p>
             </div>
@@ -187,8 +187,8 @@ export function LoginForm() {
       )}
 
       {/* Демо аккаунт */}
-      <div className="mt-6 p-4 bg-gray-50 dark:bg-gray-800 rounded-lg">
-        <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">
+      <div className="mt-6 p-4 bg-gray-50 bg-gray-800 rounded-lg">
+        <p className="text-sm text-gray-600 text-gray-400 mb-2">
           Для демонстрации используйте:
         </p>
         <div className="text-xs space-y-1">
