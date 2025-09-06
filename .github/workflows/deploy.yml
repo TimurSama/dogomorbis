@@ -20,12 +20,17 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Verify package.json exists
+      - name: Verify project structure
         run: |
+          echo "Checking project structure..."
+          ls -la
+          echo "Checking frontend directory..."
+          ls -la frontend/
           if [ ! -f "${{ github.workspace }}/frontend/package.json" ]; then
             echo "package.json not found in frontend directory"
             exit 1
           fi
+          echo "Project structure verified successfully"
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
@@ -45,9 +50,15 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-nextjs-
       - name: Install dependencies
-        run: npm ci
+        run: |
+          echo "Installing dependencies..."
+          npm ci
+          echo "Dependencies installed successfully"
       - name: Build with Next.js
-        run: cd frontend && npm run build
+        run: |
+          echo "Building Next.js app in frontend directory..."
+          cd frontend
+          npm run build
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
