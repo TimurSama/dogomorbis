@@ -1,0 +1,567 @@
+// This is your Prisma schema file for SQLite development
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+// ========================================
+// USER & AUTHENTICATION
+// ========================================
+
+model User {
+  id                String   @id @default(cuid())
+  email             String   @unique
+  username          String   @unique
+  password          String
+  firstName         String
+  lastName          String
+  avatar            String?
+  bio               String?
+  phone             String?
+  dateOfBirth       DateTime?
+  location          String? // JSON as string for SQLite
+  timezone          String?
+  language          String   @default("ru")
+  
+  // Психотип владельца
+  psychotype        String   @default("UNKNOWN")
+  psychotypeTestCompleted Boolean @default(false)
+  
+  // Родительский режим
+  isParent          Boolean  @default(false)
+  parentModeEnabled  Boolean  @default(false)
+  
+  // Статус и верификация
+  isVerified        Boolean  @default(false)
+  isActive          Boolean  @default(true)
+  isPremium         Boolean  @default(false)
+  emailVerified     Boolean  @default(false)
+  phoneVerified     Boolean  @default(false)
+  
+  // Настройки уведомлений
+  emailNotifications Boolean @default(true)
+  pushNotifications  Boolean @default(true)
+  smsNotifications   Boolean @default(false)
+  
+  // Timestamps
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+  lastLoginAt       DateTime?
+  lastActiveAt      DateTime?
+  
+  // Relations
+  dogOwnerships     DogOwnership[]
+  posts             Post[]
+  comments          Comment[]
+  likes             Like[]
+  matchesAsUser1    Match[] @relation("User1")
+  matchesAsUser2    Match[] @relation("User2")
+  matchInvitesFrom  MatchInvite[] @relation("FromUser")
+  matchInvitesTo    MatchInvite[] @relation("ToUser")
+  journalEntries    JournalEntry[]
+  goals             Goal[]
+  transactions      Transaction[]
+  referralsAsReferrer Referral[] @relation("Referrer")
+  referralsAsReferred Referral[] @relation("Referred")
+  referralCode      ReferralCode?
+  daoProposals      DAOProposal[]
+  daoVotes          DAOVote[]
+  daoStakes         DAOStake[]
+  partnerProfile    PartnerProfile?
+  adminProfile      AdminProfile?
+  notifications     Notification[]
+  messagesFrom      Message[] @relation("FromUser")
+  messagesTo        Message[] @relation("ToUser")
+  sessions          Session[]
+  level             Level?
+  collectibleCollections CollectibleCollection[]
+  achievements      Achievement[]
+  badges            Badge[]
+  
+  @@map("users")
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  userId       String
+  token        String   @unique
+  refreshToken String   @unique
+  expiresAt    DateTime
+  ipAddress    String?
+  userAgent    String?
+  isActive     Boolean  @default(true)
+  createdAt    DateTime @default(now())
+  
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  @@map("sessions")
+}
+
+// ========================================
+// DOG PROFILES & OWNERSHIP
+// ========================================
+
+model Dog {
+  id                String   @id @default(cuid())
+  name              String
+  breed             String?
+  gender            String   @default("UNKNOWN")
+  dateOfBirth       DateTime?
+  weight            Float?
+  height            Float?
+  color             String?
+  microchip         String?
+  passport          String?
+  
+  // Характеристики
+  temperament       String   @default("UNKNOWN")
+  energyLevel       String   @default("MEDIUM")
+  sociability       String   @default("MEDIUM")
+  trainability      String   @default("MEDIUM")
+  
+  // Медицинская информация
+  isNeutered        Boolean  @default(false)
+  isVaccinated      Boolean  @default(false)
+  medicalNotes      String?
+  allergies         String? // JSON as string for SQLite
+  medications       String? // JSON as string for SQLite
+  
+  // Социальная информация
+  isFriendly        Boolean  @default(true)
+  isAggressive      Boolean  @default(false)
+  isShy             Boolean  @default(false)
+  specialNeeds      String?
+  
+  // Фотографии
+  photos            DogPhoto[]
+  
+  // Timestamps
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+  
+  // Relations
+  owners            DogOwnership[]
+  posts             Post[]
+  journalEntries    JournalEntry[]
+  goals             Goal[]
+  matchesAsDog1     Match[] @relation("Dog1")
+  matchesAsDog2     Match[] @relation("Dog2")
+  collectibleCollections CollectibleCollection[]
+  
+  @@map("dogs")
+}
+
+model DogOwnership {
+  id        String   @id @default(cuid())
+  userId    String
+  dogId     String
+  role      String   @default("PRIMARY")
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  dog       Dog      @relation(fields: [dogId], references: [id], onDelete: Cascade)
+  
+  @@unique([userId, dogId])
+  @@map("dog_ownerships")
+}
+
+model DogPhoto {
+  id        String   @id @default(cuid())
+  dogId     String
+  url       String
+  caption   String?
+  isPrimary Boolean  @default(false)
+  createdAt DateTime @default(now())
+  
+  dog       Dog      @relation(fields: [dogId], references: [id], onDelete: Cascade)
+  
+  @@map("dog_photos")
+}
+
+// ========================================
+// ECONOMY & GAMIFICATION
+// ========================================
+
+model Transaction {
+  id          String   @id @default(cuid())
+  userId      String
+  type        String   @default("EARN")
+  currency    String   @default("BONES")
+  amount      Float
+  description String?
+  metadata    String? // JSON as string for SQLite
+  createdAt   DateTime @default(now())
+  
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  @@map("transactions")
+}
+
+model Level {
+  id          String   @id @default(cuid())
+  userId      String   @unique
+  level       Int      @default(1)
+  experience  Int      @default(0)
+  tier        String   @default("BRONZE")
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  @@map("levels")
+}
+
+model Achievement {
+  id          String   @id @default(cuid())
+  userId      String
+  type        String   @default("WALKING")
+  title       String
+  description String
+  icon        String
+  earnedAt    DateTime @default(now())
+  
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  @@map("achievements")
+}
+
+model Badge {
+  id          String   @id @default(cuid())
+  userId      String
+  type        String   @default("MILESTONE")
+  title       String
+  description String
+  icon        String
+  earnedAt    DateTime @default(now())
+  
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  @@map("badges")
+}
+
+// ========================================
+// REFERRAL SYSTEM
+// ========================================
+
+model ReferralCode {
+  id          String   @id @default(cuid())
+  userId      String   @unique
+  code        String   @unique
+  maxUses     Int?
+  usedCount   Int      @default(0)
+  isActive    Boolean  @default(true)
+  expiresAt   DateTime?
+  createdAt   DateTime @default(now())
+  
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  referrals   Referral[]
+  
+  @@map("referral_codes")
+}
+
+model Referral {
+  id          String   @id @default(cuid())
+  referrerId  String
+  referredId  String
+  codeId      String
+  status      String   @default("PENDING")
+  reward      Float?
+  createdAt   DateTime @default(now())
+  
+  referrer    User     @relation("Referrer", fields: [referrerId], references: [id])
+  referred    User     @relation("Referred", fields: [referredId], references: [id])
+  code        ReferralCode @relation(fields: [codeId], references: [id])
+  
+  @@map("referrals")
+}
+
+// ========================================
+// COLLECTIBLES & MAP
+// ========================================
+
+model CollectibleSpawn {
+  id          String   @id @default(cuid())
+  type        String   @default("BONE")
+  location    String   // JSON as string for SQLite
+  value       Float
+  isActive    Boolean  @default(true)
+  expiresAt   DateTime?
+  createdAt   DateTime @default(now())
+  
+  collections CollectibleCollection[]
+  
+  @@map("collectible_spawns")
+}
+
+model CollectibleCollection {
+  id          String   @id @default(cuid())
+  userId      String
+  dogId       String?
+  spawnId     String
+  collectedAt DateTime @default(now())
+  
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  dog         Dog?     @relation(fields: [dogId], references: [id], onDelete: Cascade)
+  spawn       CollectibleSpawn @relation(fields: [spawnId], references: [id])
+  
+  @@map("collectible_collections")
+}
+
+// ========================================
+// MATCHING SYSTEM
+// ========================================
+
+model Match {
+  id          String   @id @default(cuid())
+  userId1     String
+  userId2     String
+  dogId1      String?
+  dogId2      String?
+  status      String   @default("PENDING")
+  location    String?  // JSON as string for SQLite
+  scheduledAt DateTime?
+  notes       String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  user1       User     @relation("User1", fields: [userId1], references: [id])
+  user2       User     @relation("User2", fields: [userId2], references: [id])
+  dog1        Dog?     @relation("Dog1", fields: [dogId1], references: [id])
+  dog2        Dog?     @relation("Dog2", fields: [dogId2], references: [id])
+  invites     MatchInvite[]
+  
+  @@map("matches")
+}
+
+model MatchInvite {
+  id          String   @id @default(cuid())
+  fromUserId  String
+  toUserId    String
+  matchId     String
+  status      String   @default("PENDING")
+  message     String?
+  createdAt   DateTime @default(now())
+  
+  fromUser    User     @relation("FromUser", fields: [fromUserId], references: [id])
+  toUser      User     @relation("ToUser", fields: [toUserId], references: [id])
+  match       Match    @relation(fields: [matchId], references: [id])
+  
+  @@map("match_invites")
+}
+
+// ========================================
+// SOCIAL FEATURES
+// ========================================
+
+model Post {
+  id          String   @id @default(cuid())
+  userId      String
+  dogId       String?
+  content     String
+  images      String? // JSON as string for SQLite
+  location    String? // JSON as string for SQLite
+  isPublic    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  dog         Dog?     @relation(fields: [dogId], references: [id], onDelete: Cascade)
+  comments    Comment[]
+  likes       Like[]
+  
+  @@map("posts")
+}
+
+model Comment {
+  id        String   @id @default(cuid())
+  userId    String
+  postId    String
+  content   String
+  createdAt DateTime @default(now())
+  
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
+  
+  @@map("comments")
+}
+
+model Like {
+  id        String   @id @default(cuid())
+  userId    String
+  postId    String
+  createdAt DateTime @default(now())
+  
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
+  
+  @@unique([userId, postId])
+  @@map("likes")
+}
+
+// ========================================
+// JOURNAL & GOALS
+// ========================================
+
+model JournalEntry {
+  id          String   @id @default(cuid())
+  userId      String
+  dogId       String?
+  mood        String   @default("HAPPY")
+  activity    String   @default("WALK")
+  content     String
+  images      String? // JSON as string for SQLite
+  location    String? // JSON as string for SQLite
+  createdAt   DateTime @default(now())
+  
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  dog         Dog?     @relation(fields: [dogId], references: [id], onDelete: Cascade)
+  
+  @@map("journal_entries")
+}
+
+model Goal {
+  id          String   @id @default(cuid())
+  userId      String
+  dogId       String?
+  type        String   @default("WALKING")
+  title       String
+  description String?
+  target      Float?
+  current     Float    @default(0)
+  isCompleted Boolean  @default(false)
+  deadline    DateTime?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  dog         Dog?     @relation(fields: [dogId], references: [id], onDelete: Cascade)
+  
+  @@map("goals")
+}
+
+// ========================================
+// DAO & GOVERNANCE
+// ========================================
+
+model DAOProposal {
+  id          String   @id @default(cuid())
+  userId      String
+  type        String   @default("FEATURE")
+  title       String
+  description String
+  status      String   @default("ACTIVE")
+  startDate   DateTime
+  endDate     DateTime
+  minStake    Float?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  user        User     @relation(fields: [userId], references: [id])
+  votes       DAOVote[]
+  
+  @@map("dao_proposals")
+}
+
+model DAOVote {
+  id          String   @id @default(cuid())
+  userId      String
+  proposalId  String
+  voteType    String   @default("YES")
+  stakeAmount Float?
+  createdAt   DateTime @default(now())
+  
+  user        User     @relation(fields: [userId], references: [id])
+  proposal    DAOProposal @relation(fields: [proposalId], references: [id])
+  
+  @@unique([userId, proposalId])
+  @@map("dao_votes")
+}
+
+model DAOStake {
+  id          String   @id @default(cuid())
+  userId      String
+  type        String   @default("LOCKED")
+  amount      Float
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  
+  user        User     @relation(fields: [userId], references: [id])
+  
+  @@map("dao_stakes")
+}
+
+// ========================================
+// PARTNERS & ADMIN
+// ========================================
+
+model PartnerProfile {
+  id          String   @id @default(cuid())
+  userId      String   @unique
+  category    String   @default("OTHER")
+  name        String
+  description String?
+  website     String?
+  logo        String?
+  isVerified  Boolean  @default(false)
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  user        User     @relation(fields: [userId], references: [id])
+  
+  @@map("partner_profiles")
+}
+
+model AdminProfile {
+  id          String   @id @default(cuid())
+  userId      String   @unique
+  role        String   @default("SUPPORT")
+  permissions String? // JSON as string for SQLite
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  
+  user        User     @relation(fields: [userId], references: [id])
+  
+  @@map("admin_profiles")
+}
+
+// ========================================
+// NOTIFICATIONS & MESSAGING
+// ========================================
+
+model Notification {
+  id          String   @id @default(cuid())
+  userId      String
+  type        String   @default("SYSTEM")
+  title       String
+  message     String
+  data        String? // JSON as string for SQLite
+  isRead      Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  @@map("notifications")
+}
+
+model Message {
+  id          String   @id @default(cuid())
+  fromUserId  String
+  toUserId    String
+  type        String   @default("TEXT")
+  content     String
+  isRead      Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  
+  fromUser    User     @relation("FromUser", fields: [fromUserId], references: [id])
+  toUser      User     @relation("ToUser", fields: [toUserId], references: [id])
+  
+  @@map("messages")
+}

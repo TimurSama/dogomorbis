@@ -1,0 +1,31 @@
+FROM node:18-alpine
+
+WORKDIR /app
+
+# Устанавливаем зависимости для сборки
+RUN apk add --no-cache python3 make g++
+
+# Копируем package.json и package-lock.json
+COPY package*.json ./
+
+# Устанавливаем зависимости
+RUN npm ci
+
+# Копируем исходный код
+COPY . .
+
+# Генерируем Prisma клиент
+RUN npx prisma generate
+
+# Создаем директорию для загрузок
+RUN mkdir -p uploads
+
+# Открываем порт
+EXPOSE 3001
+
+# Команда по умолчанию
+CMD ["npm", "run", "dev"]
+
+
+
+
