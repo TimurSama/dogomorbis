@@ -219,20 +219,20 @@ export function ShopScreen() {
       <div className="h-full flex items-center justify-center">
         <div className="text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-500 mx-auto mb-4"></div>
-          <p className="text-gray-600 text-gray-400">Загружаем магазин...</p>
+          <p className="text-[var(--text-secondary)]">Загружаем магазин...</p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="h-full flex flex-col bg-gradient-to-br from-pink-50 via-purple-50 to-blue-50 overflow-hidden fur-texture">
+    <div className="h-full flex flex-col noise-bg overflow-hidden">
       {/* Header */}
-      <div className="bg-white/90 backdrop-blur-sm border-b border-pink-200/30 p-4 flex-shrink-0 soft-shadow pencil-border">
+      <div className="panel panel-blur p-4 flex-shrink-0 spring-in">
         <div className="flex items-center justify-between mb-4">
           <div>
-            <h1 className="text-xl font-bold text-purple-700 font-display">Магазин</h1>
-            <p className="text-sm text-purple-600">Товары для ваших питомцев</p>
+            <h1 className="text-xl font-bold text-text">Магазин</h1>
+            <p className="text-sm dim">Товары для ваших питомцев</p>
           </div>
           <div className="flex items-center space-x-2">
             <Button variant="outline" size="sm">
@@ -249,13 +249,13 @@ export function ShopScreen() {
         {/* Search and Filters */}
         <div className="flex items-center space-x-3">
           <div className="flex-1 relative">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
+            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-amber-600" />
             <input
               type="text"
               placeholder="Поиск товаров..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-10 pr-4 py-2 border border-gray-300 border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-gray-700 text-white"
+              className="w-full pl-10 pr-4 py-2 border border-[var(--outline)] rounded-lg focus:ring-2 focus:ring-[var(--honey)] focus:border-transparent bg-[var(--surface-2)] text-[var(--text)]"
             />
           </div>
           <Button
@@ -273,7 +273,7 @@ export function ShopScreen() {
           <select
             value={sortBy}
             onChange={(e) => setSortBy(e.target.value as any)}
-            className="px-3 py-2 border border-gray-300 border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-gray-700 text-white"
+            className="px-3 py-2 border border-[var(--outline)] rounded-lg focus:ring-2 focus:ring-[var(--honey)] focus:border-transparent bg-[var(--surface-2)] text-[var(--text)]"
           >
             <option value="popular">Популярные</option>
             <option value="price-low">Цена: по возрастанию</option>
@@ -286,9 +286,9 @@ export function ShopScreen() {
 
       <div className="flex-1 flex overflow-hidden">
         {/* Categories Sidebar */}
-        <div className="w-64 bg-white bg-gray-800 border-r border-gray-200 border-gray-700 flex-shrink-0 overflow-y-auto">
+        <div className="w-64 card border-r border-amber-200 flex-shrink-0 overflow-y-auto">
           <div className="p-4">
-            <h3 className="text-sm font-medium text-gray-900 text-white mb-3">Категории</h3>
+            <h3 className="text-sm font-medium text-[var(--text)] mb-3">Категории</h3>
             <div className="space-y-1">
               {categories.map((category) => (
                 <button
@@ -297,14 +297,14 @@ export function ShopScreen() {
                   className={`w-full flex items-center justify-between p-3 rounded-lg text-left transition-colors ${
                     selectedCategory === category.id
                       ? 'bg-primary-50 bg-primary-900/20 text-primary-600'
-                      : 'text-gray-700 text-gray-300 hover:bg-gray-50 hover:bg-gray-700'
+                      : 'text-[var(--text-secondary)] hover:bg-[var(--surface-2)]'
                   }`}
                 >
                   <div className="flex items-center space-x-3">
                     <span className="text-lg">{category.icon}</span>
                     <span className="font-medium">{category.name}</span>
                   </div>
-                  <span className="text-sm text-gray-500 text-gray-400">
+                  <span className="text-sm text-[var(--dim)]">
                     {category.count}
                   </span>
                 </button>
@@ -321,7 +321,7 @@ export function ShopScreen() {
                 key={product.id}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="bg-white bg-gray-800 rounded-lg shadow-sm border border-gray-200 border-gray-700 overflow-hidden hover:shadow-lg transition-shadow"
+                className="card rounded-lg shadow-sm border border-amber-200 overflow-hidden hover:shadow-lg transition-shadow"
               >
                 {/* Product Image */}
                 <div className="relative">
@@ -354,13 +354,13 @@ export function ShopScreen() {
                   {/* Favorite Button */}
                   <button
                     onClick={() => handleToggleFavorite(product.id)}
-                    className="absolute top-2 right-2 p-2 bg-white/80 bg-gray-800/80 rounded-full hover:bg-white hover:bg-gray-800 transition-colors"
+                    className="absolute top-2 right-2 p-2 bg-[var(--surface)]/80 rounded-full hover:bg-[var(--surface)] transition-colors"
                   >
                     <Heart 
                       className={`h-4 w-4 ${
                         favorites.includes(product.id) 
                           ? 'fill-red-500 text-red-500' 
-                          : 'text-gray-400'
+                          : 'text-amber-600'
                       }`} 
                     />
                   </button>
@@ -369,12 +369,12 @@ export function ShopScreen() {
                 {/* Product Info */}
                 <div className="p-4">
                   <div className="flex items-start justify-between mb-2">
-                    <h3 className="font-semibold text-gray-900 text-white line-clamp-2">
+                    <h3 className="font-semibold text-[var(--text)] line-clamp-2">
                       {product.name}
                     </h3>
                   </div>
 
-                  <p className="text-sm text-gray-600 text-gray-400 mb-3 line-clamp-2">
+                  <p className="text-sm text-[var(--text-secondary)] mb-3 line-clamp-2">
                     {product.description}
                   </p>
 
@@ -384,7 +384,7 @@ export function ShopScreen() {
                       <Star className="h-4 w-4 text-yellow-500 fill-current" />
                       <span className="text-sm font-medium ml-1">{product.rating}</span>
                     </div>
-                    <span className="text-sm text-gray-500">({product.reviews})</span>
+                    <span className="text-sm text-gray-600">({product.reviews})</span>
                   </div>
 
                   {/* Tags */}
@@ -392,7 +392,7 @@ export function ShopScreen() {
                     {product.tags.slice(0, 2).map((tag, index) => (
                       <span
                         key={index}
-                        className="px-2 py-1 bg-gray-100 bg-gray-700 text-gray-600 text-gray-400 text-xs rounded-full"
+                        className="px-2 py-1 bg-amber-100 text-gray-600 text-xs rounded-full"
                       >
                         {tag}
                       </span>
@@ -406,7 +406,7 @@ export function ShopScreen() {
                       alt={product.seller.name}
                       className="w-6 h-6 rounded-full"
                     />
-                    <span className="text-sm text-gray-600 text-gray-400">
+                    <span className="text-sm text-gray-600">
                       {product.seller.name}
                     </span>
                     {product.seller.isVerified && (
@@ -417,7 +417,7 @@ export function ShopScreen() {
                   {/* Price */}
                   <div className="flex items-center justify-between mb-4">
                     <div className="flex items-center space-x-2">
-                      <span className="text-lg font-bold text-gray-900 text-white">
+                      <span className="text-lg font-bold text-gray-800">
                         {product.price.toLocaleString()} ₽
                       </span>
                       {product.originalPrice && (
@@ -429,7 +429,7 @@ export function ShopScreen() {
                   </div>
 
                   {/* Delivery Info */}
-                  <div className="flex items-center justify-between text-sm text-gray-600 text-gray-400 mb-4">
+                  <div className="flex items-center justify-between text-sm text-gray-600 mb-4">
                     <div className="flex items-center space-x-1">
                       <Truck className="h-4 w-4" />
                       <span>{product.delivery.time}</span>
@@ -462,7 +462,7 @@ export function ShopScreen() {
           {sortedProducts.length === 0 && (
             <div className="text-center py-12">
               <ShoppingCart className="h-12 w-12 text-gray-400 mx-auto mb-4" />
-              <p className="text-gray-600 text-gray-400">Товары не найдены</p>
+              <p className="text-gray-600">Товары не найдены</p>
             </div>
           )}
         </div>

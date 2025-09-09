@@ -15,7 +15,6 @@ import {
   Award,
   TrendingUp
 } from 'lucide-react';
-import { Button } from '@/components/ui/button';
 
 interface CommunityMember {
   id: string;
@@ -133,31 +132,31 @@ export function CommunityScreen() {
   });
 
   return (
-    <div className="h-full flex flex-col bg-gradient-to-br from-pink-50 via-purple-50 to-blue-50 overflow-hidden fur-texture">
+    <div className="h-full flex flex-col bg-[var(--surface)] overflow-hidden">
       {/* Header */}
-      <div className="bg-white/90 backdrop-blur-sm border-b border-pink-200/30 p-4 flex-shrink-0 soft-shadow pencil-border">
+      <div className="bg-[var(--surface)] border-b border-[var(--outline)] p-4 flex-shrink-0">
         <div className="flex items-center justify-between mb-4">
           <div>
-            <h1 className="text-xl font-bold text-purple-700 font-display">Сообщество</h1>
-            <p className="text-sm text-purple-600">Другие собачники в вашем районе</p>
+            <h1 className="text-xl font-bold text-[var(--text)]">Сообщество</h1>
+            <p className="text-sm text-[var(--text-secondary)]">Другие собачники в вашем районе</p>
           </div>
           <div className="flex items-center space-x-2">
-            <Button variant="outline" size="sm" className="text-purple-600 border-purple-300 hover:bg-purple-50">
-              <Filter className="h-4 w-4 mr-2" />
+            <button className="px-3 py-2 text-sm border border-gray-300 rounded-lg hover:bg-gray-50">
+              <Filter className="h-4 w-4 mr-2 inline" />
               Фильтры
-            </Button>
+            </button>
           </div>
         </div>
 
         {/* Search */}
         <div className="relative mb-4">
-          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-purple-400" />
+          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
           <input
             type="text"
             placeholder="Поиск участников..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full pl-10 pr-4 py-2 border border-pink-300 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white/80 backdrop-blur-sm text-gray-800"
+            className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-[var(--surface)] text-[var(--text)]"
           />
         </div>
 
@@ -171,8 +170,8 @@ export function CommunityScreen() {
                 onClick={() => setSelectedFilter(filter.id)}
                 className={`flex items-center space-x-2 px-3 py-2 rounded-full text-sm font-medium transition-colors whitespace-nowrap ${
                   selectedFilter === filter.id
-                    ? 'bg-purple-100 text-purple-700'
-                    : 'bg-white/80 text-gray-700 hover:bg-pink-50'
+                    ? 'bg-blue-100 text-blue-700'
+                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                 }`}
               >
                 <Icon className="h-4 w-4" />
@@ -184,7 +183,7 @@ export function CommunityScreen() {
       </div>
 
       {/* Content */}
-      <div className="flex-1 overflow-y-auto p-4 bg-gradient-to-br from-pink-50 via-purple-50 to-blue-50">
+      <div className="flex-1 overflow-y-auto p-4 bg-gray-50">
         <div className="space-y-4">
           {filteredMembers.map((member, index) => (
             <motion.div
@@ -192,7 +191,7 @@ export function CommunityScreen() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1 }}
-              className="bg-white/95 backdrop-blur-sm rounded-3xl p-6 soft-shadow pencil-border fur-texture"
+              className="bg-[var(--surface)] rounded-lg p-6 shadow-sm border border-[var(--outline)]"
             >
               <div className="flex items-start space-x-4">
                 <div className="relative">
@@ -209,8 +208,8 @@ export function CommunityScreen() {
                 <div className="flex-1">
                   <div className="flex items-center justify-between mb-2">
                     <div>
-                      <h3 className="text-lg font-semibold text-gray-800">{member.firstName} {member.lastName}</h3>
-                      <p className="text-sm text-purple-600">@{member.username}</p>
+                      <h3 className="text-lg font-semibold text-[var(--text)]">{member.firstName} {member.lastName}</h3>
+                      <p className="text-sm text-[var(--text-secondary)]">@{member.username}</p>
                     </div>
                     <div className="flex items-center space-x-1">
                       <Star className="h-4 w-4 text-yellow-500" />
@@ -219,7 +218,7 @@ export function CommunityScreen() {
                   </div>
                   
                   <div className="flex items-center space-x-2 mb-3">
-                    <MapPin className="h-4 w-4 text-purple-500" />
+                    <MapPin className="h-4 w-4 text-gray-500" />
                     <span className="text-sm text-gray-700">{member.location}</span>
                     <span className="text-sm text-gray-500">•</span>
                     <span className="text-sm text-gray-500">{member.lastActive}</span>
@@ -231,7 +230,7 @@ export function CommunityScreen() {
                       {member.dogs.map((dog, dogIndex) => (
                         <span
                           key={dogIndex}
-                          className="px-2 py-1 bg-pink-100 text-purple-700 rounded-full text-xs"
+                          className="px-2 py-1 bg-gray-100 text-gray-700 rounded-full text-xs"
                         >
                           {dog.name} ({dog.breed}, {dog.age} лет)
                         </span>
@@ -245,7 +244,7 @@ export function CommunityScreen() {
                       {member.interests.map((interest, interestIndex) => (
                         <span
                           key={interestIndex}
-                          className="px-2 py-1 bg-purple-100 text-purple-700 rounded-full text-xs"
+                          className="px-2 py-1 bg-blue-100 text-blue-700 rounded-full text-xs"
                         >
                           {interest}
                         </span>
@@ -254,7 +253,7 @@ export function CommunityScreen() {
                   </div>
                   
                   <div className="flex items-center justify-between">
-                    <div className="flex items-center space-x-4 text-sm text-gray-600">
+                    <div className="flex items-center space-x-4 text-sm text-[var(--text-secondary)]">
                       <div className="flex items-center space-x-1">
                         <MessageCircle className="h-4 w-4" />
                         <span>{member.postsCount} постов</span>
@@ -272,22 +271,14 @@ export function CommunityScreen() {
                     </div>
                     
                     <div className="flex items-center space-x-2">
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        className="text-purple-600 border-purple-300 hover:bg-purple-50"
-                      >
-                        <MessageCircle className="h-4 w-4 mr-1" />
+                      <button className="px-3 py-2 text-sm border border-gray-300 rounded-lg hover:bg-gray-50">
+                        <MessageCircle className="h-4 w-4 mr-1 inline" />
                         Написать
-                      </Button>
-                      <Button
-                        variant="default"
-                        size="sm"
-                        className="bg-gradient-to-r from-pink-300 to-purple-400 hover:from-pink-400 hover:to-purple-500 text-purple-800"
-                      >
-                        <UserPlus className="h-4 w-4 mr-1" />
+                      </button>
+                      <button className="px-3 py-2 text-sm bg-blue-600 text-white rounded-lg hover:bg-blue-700">
+                        <UserPlus className="h-4 w-4 mr-1 inline" />
                         Добавить
-                      </Button>
+                      </button>
                     </div>
                   </div>
                 </div>
@@ -298,9 +289,9 @@ export function CommunityScreen() {
 
         {filteredMembers.length === 0 && (
           <div className="text-center py-12">
-            <Users className="h-16 w-16 text-purple-300 mx-auto mb-4" />
-            <h3 className="text-lg font-semibold text-gray-800 mb-2">Участники не найдены</h3>
-            <p className="text-gray-600">Попробуйте изменить фильтры или поисковый запрос</p>
+            <Users className="h-16 w-16 text-gray-300 mx-auto mb-4" />
+            <h3 className="text-lg font-semibold text-[var(--text)] mb-2">Участники не найдены</h3>
+            <p className="text-[var(--text-secondary)]">Попробуйте изменить фильтры или поисковый запрос</p>
           </div>
         )}
       </div>

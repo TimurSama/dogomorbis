@@ -3,296 +3,201 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { 
-  UserPlus, 
-  Share2, 
-  Copy, 
+  Users, 
   Gift, 
-  Users,
+  Share, 
+  Copy, 
+  Check, 
+  Star, 
   Award,
   TrendingUp,
   Calendar,
-  CheckCircle,
-  Clock,
-  Star,
-  QrCode
+  DollarSign,
+  UserPlus
 } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-
-interface Referral {
-  id: string;
-  username: string;
-  firstName: string;
-  lastName: string;
-  avatar?: string;
-  joinedAt: string;
-  status: 'pending' | 'active' | 'completed';
-  reward: number;
-  level: number;
-}
 
 export function ReferralsScreen() {
-  const [referralCode, setReferralCode] = useState('DOGY2024');
-  const [referralLink, setReferralLink] = useState('https://dogymorbis.com/ref/DOGY2024');
+  const [copiedCode, setCopiedCode] = useState(false);
+  const referralCode = 'DOGOMORBIS2024';
 
-  const mockReferrals: Referral[] = [
+  const mockReferrals = [
     {
       id: '1',
-      username: 'Анна_Собаковод',
-      firstName: 'Анна',
-      lastName: 'Петрова',
-      avatar: '/api/placeholder/40/40',
-      joinedAt: '2024-01-15',
-      status: 'completed',
+      name: 'Анна Петрова',
+      email: 'anna@example.com',
+      joinDate: '10 марта 2024',
+      status: 'active',
       reward: 100,
-      level: 1
     },
     {
       id: '2',
-      username: 'Максим_Кинолог',
-      firstName: 'Максим',
-      lastName: 'Сидоров',
-      avatar: '/api/placeholder/40/40',
-      joinedAt: '2024-01-10',
+      name: 'Максим Сидоров',
+      email: 'maxim@example.com',
+      joinDate: '8 марта 2024',
       status: 'active',
-      reward: 50,
-      level: 2
+      reward: 100,
     },
     {
       id: '3',
-      username: 'Елена_Ветеринар',
-      firstName: 'Елена',
-      lastName: 'Козлова',
-      avatar: '/api/placeholder/40/40',
-      joinedAt: '2024-01-08',
+      name: 'Елена Козлова',
+      email: 'elena@example.com',
+      joinDate: '5 марта 2024',
       status: 'pending',
       reward: 0,
-      level: 0
-    }
+    },
   ];
 
-  const referralStats = {
-    totalReferrals: mockReferrals.length,
-    activeReferrals: mockReferrals.filter(r => r.status === 'active').length,
-    completedReferrals: mockReferrals.filter(r => r.status === 'completed').length,
-    totalEarned: mockReferrals.reduce((sum, r) => sum + r.reward, 0),
-    pendingRewards: mockReferrals.filter(r => r.status === 'pending').length * 50
+  const stats = {
+    totalReferrals: 3,
+    activeReferrals: 2,
+    totalRewards: 200,
+    pendingRewards: 100,
   };
 
-  const getStatusColor = (status: string) => {
-    switch (status) {
-      case 'completed': return 'bg-green-100 text-green-700';
-      case 'active': return 'bg-blue-100 text-blue-700';
-      case 'pending': return 'bg-yellow-100 text-yellow-700';
-      default: return 'bg-gray-100 text-gray-700';
-    }
-  };
-
-  const getStatusIcon = (status: string) => {
-    switch (status) {
-      case 'completed': return <CheckCircle className="h-4 w-4" />;
-      case 'active': return <Clock className="h-4 w-4" />;
-      case 'pending': return <Clock className="h-4 w-4" />;
-      default: return <Clock className="h-4 w-4" />;
-    }
-  };
-
-  const copyToClipboard = (text: string) => {
-    navigator.clipboard.writeText(text);
-    // Здесь можно добавить уведомление об успешном копировании
-  };
-
-  const shareReferral = () => {
-    if (navigator.share) {
-      navigator.share({
-        title: 'Присоединяйтесь к Dogymorbis!',
-        text: 'Присоединяйтесь к сообществу собачников и получите бонус!',
-        url: referralLink
-      });
-    } else {
-      copyToClipboard(referralLink);
-    }
+  const copyReferralCode = () => {
+    navigator.clipboard.writeText(referralCode);
+    setCopiedCode(true);
+    setTimeout(() => setCopiedCode(false), 2000);
   };
 
   return (
-    <div className="h-full flex flex-col bg-gradient-to-br from-pink-50 via-purple-50 to-blue-50 overflow-hidden fur-texture">
+    <div className="h-full flex flex-col bg-[var(--surface)] overflow-hidden">
       {/* Header */}
-      <div className="bg-white/90 backdrop-blur-sm border-b border-pink-200/30 p-4 flex-shrink-0 soft-shadow pencil-border">
-        <div className="flex items-center justify-between mb-4">
-          <div>
-            <h1 className="text-xl font-bold text-purple-700 font-display">Рефералы</h1>
-            <p className="text-sm text-purple-600">Приглашайте друзей и получайте награды</p>
+      <div className="bg-[var(--surface)] border-b border-[var(--outline)] p-4 flex-shrink-0">
+        <h1 className="text-xl font-bold text-[var(--text)] mb-4">Реферальная программа</h1>
+        
+        {/* Stats */}
+        <div className="grid grid-cols-2 gap-4 mb-4">
+          <div className="bg-[var(--surface-2)] rounded-lg p-3">
+            <div className="flex items-center space-x-2">
+              <Users className="h-5 w-5 text-blue-500" />
+              <span className="text-sm font-medium text-[var(--text)]">Рефералов</span>
+            </div>
+            <div className="text-xl font-bold text-[var(--text)]">{stats.totalReferrals}</div>
           </div>
-          <div className="flex items-center space-x-2">
-            <Button variant="outline" size="sm" className="text-purple-600 border-purple-300 hover:bg-purple-50">
-              <QrCode className="h-4 w-4 mr-2" />
-              QR код
-            </Button>
+          <div className="bg-[var(--surface-2)] rounded-lg p-3">
+            <div className="flex items-center space-x-2">
+              <DollarSign className="h-5 w-5 text-green-500" />
+              <span className="text-sm font-medium text-[var(--text)]">Награды</span>
+            </div>
+            <div className="text-xl font-bold text-[var(--text)]">{stats.totalRewards}</div>
           </div>
         </div>
 
-        {/* Stats */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4">
-          <div className="bg-white/80 backdrop-blur-sm rounded-xl p-3 text-center">
-            <div className="text-2xl font-bold text-purple-700">{referralStats.totalReferrals}</div>
-            <div className="text-xs text-gray-600">Всего приглашено</div>
-          </div>
-          <div className="bg-white/80 backdrop-blur-sm rounded-xl p-3 text-center">
-            <div className="text-2xl font-bold text-green-600">{referralStats.activeReferrals}</div>
-            <div className="text-xs text-gray-600">Активных</div>
-          </div>
-          <div className="bg-white/80 backdrop-blur-sm rounded-xl p-3 text-center">
-            <div className="text-2xl font-bold text-blue-600">{referralStats.completedReferrals}</div>
-            <div className="text-xs text-gray-600">Завершено</div>
-          </div>
-          <div className="bg-white/80 backdrop-blur-sm rounded-xl p-3 text-center">
-            <div className="text-2xl font-bold text-yellow-600">{referralStats.totalEarned}</div>
-            <div className="text-xs text-gray-600">Заработано</div>
+        {/* Referral Code */}
+        <div className="bg-blue-50 rounded-lg p-4">
+          <h3 className="font-semibold text-[var(--text)] mb-2">Ваш реферальный код</h3>
+          <div className="flex items-center space-x-2">
+            <div className="flex-1 bg-[var(--surface)] border border-[var(--outline)] rounded-lg px-3 py-2">
+              <span className="font-mono text-lg font-bold text-[var(--text)]">{referralCode}</span>
+            </div>
+            <button
+              onClick={copyReferralCode}
+              className="flex items-center space-x-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+            >
+              {copiedCode ? (
+                <>
+                  <Check className="h-4 w-4" />
+                  <span>Скопировано</span>
+                </>
+              ) : (
+                <>
+                  <Copy className="h-4 w-4" />
+                  <span>Копировать</span>
+                </>
+              )}
+            </button>
           </div>
         </div>
       </div>
 
       {/* Content */}
-      <div className="flex-1 overflow-y-auto p-4 bg-gradient-to-br from-pink-50 via-purple-50 to-blue-50">
-        {/* Referral Code Section */}
-        <div className="bg-white/95 backdrop-blur-sm rounded-3xl p-6 mb-4 soft-shadow pencil-border fur-texture">
-          <h2 className="text-lg font-semibold text-gray-800 mb-4">Ваш реферальный код</h2>
-          
-          <div className="space-y-4">
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">Код для приглашения</label>
-              <div className="flex items-center space-x-2">
-                <input
-                  type="text"
-                  value={referralCode}
-                  readOnly
-                  className="flex-1 px-3 py-2 border border-pink-300 rounded-xl bg-white/80 backdrop-blur-sm text-gray-800 font-mono text-lg"
-                />
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={() => copyToClipboard(referralCode)}
-                  className="text-purple-600 border-purple-300 hover:bg-purple-50"
-                >
-                  <Copy className="h-4 w-4" />
-                </Button>
+      <div className="flex-1 overflow-y-auto p-4">
+        {/* How it works */}
+        <div className="bg-[var(--surface-2)] rounded-lg p-4 mb-6">
+          <h3 className="font-semibold text-[var(--text)] mb-3">Как это работает</h3>
+          <div className="space-y-3">
+            <div className="flex items-start space-x-3">
+              <div className="w-6 h-6 bg-blue-600 text-white rounded-full flex items-center justify-center text-sm font-bold">
+                1
               </div>
+              <p className="text-sm text-[var(--text-secondary)]">
+                Поделитесь своим реферальным кодом с друзьями
+              </p>
             </div>
-            
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">Ссылка для приглашения</label>
-              <div className="flex items-center space-x-2">
-                <input
-                  type="text"
-                  value={referralLink}
-                  readOnly
-                  className="flex-1 px-3 py-2 border border-pink-300 rounded-xl bg-white/80 backdrop-blur-sm text-gray-800 text-sm"
-                />
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={() => copyToClipboard(referralLink)}
-                  className="text-purple-600 border-purple-300 hover:bg-purple-50"
-                >
-                  <Copy className="h-4 w-4" />
-                </Button>
-                <Button
-                  variant="default"
-                  size="sm"
-                  onClick={shareReferral}
-                  className="bg-gradient-to-r from-pink-300 to-purple-400 hover:from-pink-400 hover:to-purple-500 text-purple-800"
-                >
-                  <Share2 className="h-4 w-4" />
-                </Button>
+            <div className="flex items-start space-x-3">
+              <div className="w-6 h-6 bg-blue-600 text-white rounded-full flex items-center justify-center text-sm font-bold">
+                2
               </div>
+              <p className="text-sm text-[var(--text-secondary)]">
+                Друг регистрируется по вашему коду
+              </p>
             </div>
-          </div>
-        </div>
-
-        {/* Rewards Info */}
-        <div className="bg-white/95 backdrop-blur-sm rounded-3xl p-6 mb-4 soft-shadow pencil-border fur-texture">
-          <h2 className="text-lg font-semibold text-gray-800 mb-4">Система наград</h2>
-          
-          <div className="space-y-4">
-            <div className="flex items-center space-x-3 p-3 bg-green-50 rounded-xl">
-              <Gift className="h-6 w-6 text-green-600" />
-              <div>
-                <div className="font-medium text-gray-800">За каждого друга</div>
-                <div className="text-sm text-gray-600">50 косточек при регистрации</div>
+            <div className="flex items-start space-x-3">
+              <div className="w-6 h-6 bg-blue-600 text-white rounded-full flex items-center justify-center text-sm font-bold">
+                3
               </div>
-            </div>
-            
-            <div className="flex items-center space-x-3 p-3 bg-blue-50 rounded-xl">
-              <Award className="h-6 w-6 text-blue-600" />
-              <div>
-                <div className="font-medium text-gray-800">При первой активности</div>
-                <div className="text-sm text-gray-600">+50 косточек за первую прогулку</div>
-              </div>
-            </div>
-            
-            <div className="flex items-center space-x-3 p-3 bg-purple-50 rounded-xl">
-              <Star className="h-6 w-6 text-purple-600" />
-              <div>
-                <div className="font-medium text-gray-800">Бонус за активность</div>
-                <div className="text-sm text-gray-600">Дополнительные награды за активность друзей</div>
-              </div>
+              <p className="text-sm text-[var(--text-secondary)]">
+                Вы получаете 100 очков за каждого реферала
+              </p>
             </div>
           </div>
         </div>
 
         {/* Referrals List */}
-        <div className="bg-white/95 backdrop-blur-sm rounded-3xl p-6 soft-shadow pencil-border fur-texture">
-          <h2 className="text-lg font-semibold text-gray-800 mb-4">Ваши рефералы</h2>
-          
-          {mockReferrals.length > 0 ? (
-            <div className="space-y-3">
-              {mockReferrals.map((referral, index) => (
-                <motion.div
-                  key={referral.id}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: index * 0.1 }}
-                  className="flex items-center justify-between p-4 bg-white/80 backdrop-blur-sm rounded-xl border border-pink-200/30"
-                >
-                  <div className="flex items-center space-x-3">
-                    <img
-                      src={referral.avatar || '/api/placeholder/40/40'}
-                      alt={referral.username}
-                      className="w-10 h-10 rounded-full object-cover"
-                    />
-                    <div>
-                      <div className="font-medium text-gray-800">{referral.firstName} {referral.lastName}</div>
-                      <div className="text-sm text-purple-600">@{referral.username}</div>
-                      <div className="text-xs text-gray-500">Присоединился: {referral.joinedAt}</div>
-                    </div>
-                  </div>
-                  
-                  <div className="flex items-center space-x-3">
-                    <div className="text-right">
-                      <div className="font-medium text-gray-800">{referral.reward} косточек</div>
-                      <div className={`inline-flex items-center space-x-1 px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(referral.status)}`}>
-                        {getStatusIcon(referral.status)}
-                        <span>{referral.status}</span>
-                      </div>
-                    </div>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          ) : (
-            <div className="text-center py-8">
-              <UserPlus className="h-16 w-16 text-purple-300 mx-auto mb-4" />
-              <h3 className="text-lg font-semibold text-gray-800 mb-2">Пока нет рефералов</h3>
-              <p className="text-gray-600 mb-4">Пригласите друзей и получите награды!</p>
-              <Button
-                variant="default"
-                className="bg-gradient-to-r from-pink-300 to-purple-400 hover:from-pink-400 hover:to-purple-500 text-purple-800"
-                onClick={shareReferral}
+        <div>
+          <h3 className="font-semibold text-[var(--text)] mb-4">Ваши рефералы</h3>
+          <div className="space-y-3">
+            {mockReferrals.map((referral, index) => (
+              <motion.div
+                key={referral.id}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.1 }}
+                className="bg-[var(--surface)] rounded-lg border border-[var(--outline)] p-4"
               >
-                <Share2 className="h-4 w-4 mr-2" />
-                Поделиться
-              </Button>
-            </div>
-          )}
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center space-x-3">
+                    <div className="w-10 h-10 bg-[var(--surface-2)] rounded-full flex items-center justify-center">
+                      <UserPlus className="h-5 w-5 text-[var(--dim)]" />
+                    </div>
+                    <div>
+                      <h4 className="font-semibold text-[var(--text)]">{referral.name}</h4>
+                      <p className="text-sm text-[var(--text-secondary)]">{referral.email}</p>
+                      <p className="text-xs text-[var(--dim)]">Присоединился {referral.joinDate}</p>
+                    </div>
+                  </div>
+                  <div className="text-right">
+                    <div className={`px-2 py-1 rounded-full text-xs font-medium ${
+                      referral.status === 'active'
+                        ? 'bg-green-100 text-green-700'
+                        : 'bg-yellow-100 text-yellow-700'
+                    }`}>
+                      {referral.status === 'active' ? 'Активен' : 'Ожидает'}
+                    </div>
+                    <div className="text-sm font-medium text-[var(--text)] mt-1">
+                      {referral.reward} очков
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+
+        {/* Share Buttons */}
+        <div className="mt-6">
+          <h3 className="font-semibold text-[var(--text)] mb-3">Поделиться</h3>
+          <div className="grid grid-cols-2 gap-3">
+            <button className="flex items-center justify-center space-x-2 p-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
+              <Share className="h-4 w-4" />
+              <span>Социальные сети</span>
+            </button>
+            <button className="flex items-center justify-center space-x-2 p-3 bg-green-600 text-white rounded-lg hover:bg-green-700">
+              <Share className="h-4 w-4" />
+              <span>Мессенджеры</span>
+            </button>
+          </div>
         </div>
       </div>
     </div>

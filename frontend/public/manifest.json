@@ -1,32 +1,27 @@
 {
   "name": "Dogymorbis - Сообщество собачников",
   "short_name": "Dogymorbis",
-  "description": "Приложение для владельцев собак с интерактивной картой, лентой новостей и системой совпадений",
+  "description": "Приложение для владельцев собак с картой, лентой, магазином и социальными функциями",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#ffffff",
-  "theme_color": "#3b82f6",
-  "orientation": "portrait-primary",
+  "background_color": "#F8F6F3",
+  "theme_color": "#87CEEB",
+  "orientation": "portrait",
   "scope": "/",
   "lang": "ru",
-  "categories": ["lifestyle", "social", "pets"],
+  "categories": ["social", "lifestyle", "pets"],
   "icons": [
     {
       "src": "/icon-192x192.png",
       "sizes": "192x192",
       "type": "image/png",
-      "purpose": "maskable any"
+      "purpose": "any maskable"
     },
     {
       "src": "/icon-512x512.png",
       "sizes": "512x512",
       "type": "image/png",
-      "purpose": "maskable any"
-    },
-    {
-      "src": "/apple-touch-icon.png",
-      "sizes": "180x180",
-      "type": "image/png"
+      "purpose": "any maskable"
     }
   ],
   "screenshots": [
@@ -35,20 +30,14 @@
       "sizes": "390x844",
       "type": "image/png",
       "form_factor": "narrow"
-    },
-    {
-      "src": "/screenshot-desktop.png",
-      "sizes": "1280x720",
-      "type": "image/png",
-      "form_factor": "wide"
     }
   ],
   "shortcuts": [
     {
       "name": "Карта",
       "short_name": "Карта",
-      "description": "Открыть интерактивную карту",
-      "url": "/?screen=map",
+      "description": "Открыть карту с маркерами",
+      "url": "/map",
       "icons": [
         {
           "src": "/icon-192x192.png",
@@ -59,8 +48,8 @@
     {
       "name": "Лента",
       "short_name": "Лента",
-      "description": "Открыть ленту новостей",
-      "url": "/?screen=feed",
+      "description": "Просмотр ленты новостей",
+      "url": "/feed",
       "icons": [
         {
           "src": "/icon-192x192.png",
@@ -68,14 +57,5 @@
         }
       ]
     }
-  ],
-  "related_applications": [],
-  "prefer_related_applications": false,
-  "edge_side_panel": {
-    "preferred_width": 400
-  },
-  "launch_handler": {
-    "client_mode": "navigate-existing"
-  }
+  ]
 }
-

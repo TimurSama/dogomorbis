@@ -1,62 +1,91 @@
 'use client';
 
-import { Loader2 } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 interface LoadingSpinnerProps {
-  size?: 'sm' | 'md' | 'lg' | 'xl';
-  className?: string;
+  size?: 'sm' | 'md' | 'lg';
   text?: string;
+  showDog?: boolean;
+  className?: string;
 }
-
-const sizeClasses = {
-  sm: 'h-4 w-4',
-  md: 'h-6 w-6',
-  lg: 'h-8 w-8',
-  xl: 'h-12 w-12',
-};
 
 export function LoadingSpinner({ 
   size = 'md', 
-  className = '', 
-  text 
+  text = 'Загрузка...', 
+  showDog = true,
+  className = '' 
 }: LoadingSpinnerProps) {
+  const sizeClasses = {
+    sm: 'w-8 h-8',
+    md: 'w-12 h-12',
+    lg: 'w-16 h-16',
+  };
+
+  const textSizes = {
+    sm: 'caption',
+    md: 'body',
+    lg: 'title',
+  };
+
+  const dogSizes = {
+    sm: 'text-lg',
+    md: 'text-2xl',
+    lg: 'text-3xl',
+  };
+
   return (
-    <div className={`flex items-center justify-center ${className}`}>
-      <div className="flex flex-col items-center space-y-2">
-        <Loader2 className={`${sizeClasses[size]} animate-spin text-primary-600`} />
-        {text && (
-          <p className="text-sm text-gray-600 text-gray-400">{text}</p>
+    <motion.div 
+      className={`text-center ${className}`}
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.3 }}
+    >
+      {/* Физическая анимация загрузки */}
+      <div className="relative mb-4">
+        <motion.div
+          className={`${sizeClasses[size]} mx-auto`}
+          animate={{
+            rotate: 360,
+          }}
+          transition={{
+            duration: 2,
+            repeat: Infinity,
+            ease: "linear"
+          }}
+        >
+          <div className="w-full h-full border-4 border-surface-2 rounded-full">
+            <div className="w-full h-full border-4 border-primary border-t-transparent rounded-full"></div>
+          </div>
+        </motion.div>
+        
+        {/* Собака в центре */}
+        {showDog && (
+          <motion.div
+            className="absolute inset-0 flex items-center justify-center"
+            animate={{
+              scale: [1, 1.1, 1],
+              rotate: [0, 5, -5, 0],
+            }}
+            transition={{
+              duration: 1.5,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
+          >
+            <span className={dogSizes[size]}>🐕</span>
+          </motion.div>
         )}
       </div>
-    </div>
+      
+      {text && (
+        <motion.p 
+          className={`text-secondary ${textSizes[size]}`}
+          animate={{ opacity: [0.5, 1, 0.5] }}
+          transition={{ duration: 1.5, repeat: Infinity }}
+        >
+          {text}
+        </motion.p>
+      )}
+    </motion.div>
   );
 }
-
-// Компонент для полноэкранной загрузки
-export function FullScreenLoader({ text = 'Загрузка...' }: { text?: string }) {
-  return (
-    <div className="fixed inset-0 bg-white bg-gray-900 flex items-center justify-center z-50">
-      <LoadingSpinner size="xl" text={text} />
-    </div>
-  );
-}
-
-// Компонент для загрузки в контейнере
-export function ContainerLoader({ text = 'Загрузка...' }: { text?: string }) {
-  return (
-    <div className="flex items-center justify-center py-12">
-      <LoadingSpinner size="lg" text={text} />
-    </div>
-  );
-}
-
-// Компонент для загрузки кнопки
-export function ButtonLoader({ text = 'Загрузка...' }: { text?: string }) {
-  return (
-    <div className="flex items-center space-x-2">
-      <Loader2 className="h-4 w-4 animate-spin" />
-      <span>{text}</span>
-    </div>
-  );
-}
-

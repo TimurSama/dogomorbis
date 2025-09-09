@@ -1,4 +1,4 @@
-name: Deploy Next.js site to Pages
+name: Deploy Next.js site to Pages v2
 
 on:
   push:
@@ -11,8 +11,8 @@ permissions:
   id-token: write
 
 concurrency:
-  group: "pages"
-  cancel-in-progress: false
+  group: "pages-v2"
+  cancel-in-progress: true
 
 jobs:
   build:

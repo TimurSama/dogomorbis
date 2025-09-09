@@ -10,8 +10,6 @@ import {
   Settings, 
   HelpCircle, 
   Info,
-  Shield,
-  Crown,
   Users,
   Calendar,
   BookOpen,
@@ -19,11 +17,9 @@ import {
   Gift,
   MessageSquare,
   ShoppingBag,
-  UserPlus,
-  UserCheck
+  UserPlus
 } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { useAuthStore } from '@/stores/auth';
+import { ThemeToggle } from '@/components/ui/ThemeToggle';
 
 interface SidebarProps {
   isOpen: boolean;
@@ -35,56 +31,46 @@ interface SidebarProps {
 }
 
 export function Sidebar({ isOpen, onClose, onScreenChange, activeScreen, isGuest = false, onShowAuth }: SidebarProps) {
-  const { user } = useAuthStore();
-
   const navigationItems = [
     {
       id: 'map' as const,
       icon: Map,
       label: 'Карта',
-      description: 'Найдите собак и предметы поблизости',
     },
     {
       id: 'feed' as const,
       icon: Rss,
       label: 'Лента',
-      description: 'Последние публикации сообщества',
     },
     {
       id: 'profile' as const,
       icon: User,
       label: 'Профиль',
-      description: 'Управление аккаунтом и собаками',
     },
     {
       id: 'wallet' as const,
       icon: Wallet,
       label: 'Кошелёк',
-      description: 'Баланс и транзакции',
     },
     {
       id: 'shop' as const,
       icon: ShoppingBag,
       label: 'Магазин',
-      description: 'Товары и награды',
     },
     {
       id: 'friends' as const,
       icon: UserPlus,
       label: 'Друзья',
-      description: 'Поиск и знакомства',
     },
     {
       id: 'group' as const,
       icon: Users,
       label: 'Группы',
-      description: 'Сообщества и обсуждения',
     },
     {
       id: 'messages' as const,
       icon: MessageSquare,
       label: 'Сообщения',
-      description: 'Чаты и уведомления',
     },
   ];
 
@@ -93,38 +79,31 @@ export function Sidebar({ isOpen, onClose, onScreenChange, activeScreen, isGuest
       id: 'events',
       icon: Calendar,
       label: 'События',
-      description: 'Ближайшие мероприятия',
-      badge: '3',
     },
     {
       id: 'community',
       icon: Users,
       label: 'Сообщество',
-      description: 'Другие собачники',
     },
     {
       id: 'diary',
       icon: BookOpen,
       label: 'Дневник',
-      description: 'Записи о прогулках',
     },
     {
       id: 'achievements',
       icon: Award,
       label: 'Достижения',
-      description: 'Ваши награды',
     },
     {
       id: 'referrals',
       icon: Gift,
       label: 'Рефералы',
-      description: 'Пригласите друзей',
     },
     {
       id: 'support',
       icon: MessageSquare,
       label: 'Поддержка',
-      description: 'Помощь и обратная связь',
     },
   ];
 
@@ -138,7 +117,7 @@ export function Sidebar({ isOpen, onClose, onScreenChange, activeScreen, isGuest
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={onClose}
-            className="fixed inset-0 bg-black bg-opacity-50 z-40 lg:hidden"
+            className="fixed inset-0 bg-black/50 backdrop-blur-sm z-40 lg:hidden"
           />
 
           {/* Sidebar */}
@@ -147,100 +126,81 @@ export function Sidebar({ isOpen, onClose, onScreenChange, activeScreen, isGuest
             animate={{ x: 0 }}
             exit={{ x: '-100%' }}
             transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-               className="fixed left-0 top-0 h-full w-80 bg-white/95 backdrop-blur-md border-r border-pink-200/30 z-50 overflow-y-auto soft-shadow-lg fur-texture pencil-border"
+            className="sidebar-content fixed left-0 top-0 h-full w-80 z-50 bg-[var(--surface)] border-r border-[var(--outline)] overflow-y-auto"
           >
             {/* Header */}
-            <div className="flex items-center justify-between p-4 border-b border-pink-200/30">
+            <div className="flex items-center justify-between p-4 border-b border-[var(--outline)]">
               <div className="flex items-center space-x-3">
-                <div className="w-10 h-10 bg-gradient-to-br from-pink-300 to-purple-400 rounded-lg flex items-center justify-center soft-shadow">
-                  <span className="text-white font-bold text-lg">🐕</span>
+                <div className="w-10 h-10 bg-[var(--honey)] rounded-[var(--radius-lg)] flex items-center justify-center">
+                  <span className="text-[#1C1A19] font-bold text-lg">🐕</span>
                 </div>
                 <div>
-                  <h2 className="text-lg font-semibold text-purple-600 font-display">
+                  <h2 className="text-lg font-semibold text-[color:var(--text)]">
                     Dogymorbis
                   </h2>
-                  <p className="text-sm text-pink-500">
+                  <p className="text-sm text-[color:var(--dim)]">
                     Сообщество собачников
                   </p>
                 </div>
               </div>
               
-              <Button
-                variant="ghost"
-                size="icon"
+              <motion.button
                 onClick={onClose}
-                className="lg:hidden"
+                className="lg:hidden p-2 hover:bg-[var(--surface-2)] rounded-[var(--radius-sm)] transition-colors touch-target"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                aria-label="Закрыть меню"
               >
-                <X className="h-5 w-5" />
-              </Button>
+                <X className="w-6 h-6 text-[color:var(--dim)]" />
+              </motion.button>
             </div>
 
             {/* User Info */}
-            <div className="p-4 border-b border-pink-200/30">
+            <div className="p-4 border-b border-[var(--outline)]">
               {isGuest ? (
                 <div className="text-center">
-                  <div className="w-16 h-16 bg-gradient-to-br from-pink-200 to-purple-300 rounded-full flex items-center justify-center mx-auto mb-3 soft-shadow">
-                    <User className="h-8 w-8 text-purple-600" />
+                  <div className="w-16 h-16 bg-[var(--surface-2)] rounded-full flex items-center justify-center mx-auto mb-3">
+                    <User className="h-8 w-8 text-[color:var(--dim)]" />
                   </div>
-                  <h3 className="text-sm font-medium text-gray-800 mb-1">
+                  <h3 className="text-sm font-medium text-[color:var(--text)] mb-1">
                     Гостевой режим
                   </h3>
-                  <p className="text-xs text-purple-600 mb-3">
+                  <p className="text-xs text-[color:var(--dim)] mb-3">
                     Войдите для полного доступа
                   </p>
                   <div className="space-y-2">
-                    <Button
-                      variant="default"
-                      size="sm"
+                    <button
                       onClick={() => {
                         onShowAuth?.();
                         onClose();
                       }}
-                      className="w-full bg-primary-600 hover:bg-primary-700"
+                      className="w-full bg-[var(--honey)] text-[#1C1A19] px-4 py-2 rounded-[var(--radius-md)] border border-[var(--outline)] text-sm"
                     >
                       Войти
-                    </Button>
-                    <Button
-                      variant="outline"
-                      size="sm"
+                    </button>
+                    <button
                       onClick={() => {
                         onShowAuth?.();
                         onClose();
                       }}
-                      className="w-full"
+                      className="w-full bg-transparent text-[color:var(--text)] border border-[color:var(--line)] px-4 py-2 rounded-[var(--radius-md)] text-sm"
                     >
                       Регистрация
-                    </Button>
+                    </button>
                   </div>
                 </div>
               ) : (
                 <div className="flex items-center space-x-3">
-                  <div className="w-12 h-12 bg-primary-100 bg-primary-900 rounded-full flex items-center justify-center">
-                    {user?.avatar ? (
-                      <img
-                        src={user.avatar}
-                        alt={user.username}
-                        className="w-12 h-12 rounded-full"
-                      />
-                    ) : (
-                      <User className="h-6 w-6 text-primary-600" />
-                    )}
+                  <div className="w-12 h-12 bg-[var(--surface-2)] rounded-full flex items-center justify-center">
+                    <User className="h-6 w-6 text-[color:var(--dim)]" />
                   </div>
                   <div className="flex-1">
-                    <h3 className="text-sm font-medium text-gray-800">
-                      {user?.firstName} {user?.lastName}
+                    <h3 className="text-sm font-medium text-[color:var(--text)]">
+                      Пользователь
                     </h3>
-                    <p className="text-xs text-purple-600">
-                      @{user?.username}
+                    <p className="text-xs text-[color:var(--dim)]">
+                      @username
                     </p>
-                    {user?.isPremium && (
-                      <div className="flex items-center mt-1">
-                        <Crown className="h-3 w-3 text-yellow-500 mr-1" />
-                        <span className="text-xs text-yellow-600 text-yellow-400">
-                          Premium
-                        </span>
-                      </div>
-                    )}
                   </div>
                 </div>
               )}
@@ -248,7 +208,7 @@ export function Sidebar({ isOpen, onClose, onScreenChange, activeScreen, isGuest
 
             {/* Navigation */}
             <div className="p-4">
-              <h3 className="text-xs font-semibold text-purple-600 uppercase tracking-wider mb-3">
+              <h3 className="text-xs font-semibold text-[color:var(--dim)] uppercase tracking-wider mb-3">
                 Основное
               </h3>
               
@@ -264,23 +224,14 @@ export function Sidebar({ isOpen, onClose, onScreenChange, activeScreen, isGuest
                         onScreenChange(item.id);
                         onClose();
                       }}
-                      className={`w-full flex items-center space-x-3 px-3 py-2 rounded-lg text-left transition-colors ${
-                        isActive
-                          ? 'bg-purple-50 text-purple-600'
-                          : 'text-gray-800 hover:bg-pink-50'
-                      }`}
+                      className={`sidebar-item ${isActive ? 'active' : ''}`}
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
                     >
-                      <Icon className={`h-5 w-5 ${isActive ? 'text-purple-600' : 'text-purple-500'}`} />
-                      <div className="flex-1">
-                        <p className={`text-sm font-medium ${isActive ? 'text-purple-600' : 'text-gray-800'}`}>
-                          {item.label}
-                        </p>
-                        <p className="text-xs text-purple-600">
-                          {item.description}
-                        </p>
-                      </div>
+                      <Icon className="sidebar-item-icon" />
+                      <span className="text-sm font-medium">
+                        {item.label}
+                      </span>
                     </motion.button>
                   );
                 })}
@@ -289,7 +240,7 @@ export function Sidebar({ isOpen, onClose, onScreenChange, activeScreen, isGuest
 
             {/* Additional Features */}
             <div className="p-4">
-              <h3 className="text-xs font-semibold text-purple-600 uppercase tracking-wider mb-3">
+              <h3 className="text-xs font-semibold text-[color:var(--dim)] uppercase tracking-wider mb-3">
                 Дополнительно
               </h3>
               
@@ -304,24 +255,12 @@ export function Sidebar({ isOpen, onClose, onScreenChange, activeScreen, isGuest
                         onScreenChange(item.id as any);
                         onClose();
                       }}
-                      className="w-full flex items-center space-x-3 px-3 py-2 rounded-lg text-left text-gray-800 hover:bg-pink-50 transition-colors"
+                      className="sidebar-item"
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
                     >
-                      <Icon className="h-5 w-5 text-purple-500" />
-                      <div className="flex-1">
-                        <div className="flex items-center justify-between">
-                          <p className="text-sm font-medium">{item.label}</p>
-                          {item.badge && (
-                            <span className="bg-red-500 text-white text-xs rounded-full px-2 py-1">
-                              {item.badge}
-                            </span>
-                          )}
-                        </div>
-                        <p className="text-xs text-purple-600">
-                          {item.description}
-                        </p>
-                      </div>
+                      <Icon className="sidebar-item-icon" />
+                      <span className="text-sm font-medium">{item.label}</span>
                     </motion.button>
                   );
                 })}
@@ -329,48 +268,41 @@ export function Sidebar({ isOpen, onClose, onScreenChange, activeScreen, isGuest
             </div>
 
             {/* Footer */}
-            <div className="mt-auto p-4 border-t border-gray-200 border-gray-700">
+            <div className="mt-auto p-4 border-t border-border">
               <div className="space-y-2">
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  className="w-full justify-start text-gray-800 hover:text-purple-600 hover:bg-pink-50"
+                <button
+                  className="sidebar-item"
                   onClick={() => {
                     onScreenChange('settings');
                     onClose();
                   }}
                 >
-                  <Settings className="h-4 w-4 mr-2" />
-                  Настройки
-                </Button>
+                  <Settings className="sidebar-item-icon" />
+                  <span className="text-sm font-medium">Настройки</span>
+                </button>
                 
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  className="w-full justify-start text-gray-800 hover:text-purple-600 hover:bg-pink-50"
+                <button
+                  className="sidebar-item"
                   onClick={() => {
                     onScreenChange('support');
                     onClose();
                   }}
                 >
-                  <HelpCircle className="h-4 w-4 mr-2" />
-                  Помощь
-                </Button>
+                  <HelpCircle className="sidebar-item-icon" />
+                  <span className="text-sm font-medium">Помощь</span>
+                </button>
                 
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  className="w-full justify-start text-gray-800 hover:text-purple-600 hover:bg-pink-50"
-                >
-                  <Info className="h-4 w-4 mr-2" />
-                  О приложении
-                </Button>
+                <button className="sidebar-item">
+                  <Info className="sidebar-item-icon" />
+                  <span className="text-sm font-medium">О приложении</span>
+                </button>
               </div>
               
-              <div className="mt-4 pt-4 border-t border-pink-200/30">
-                <p className="text-xs text-purple-600 text-center">
+              <div className="mt-4 pt-4 border-t border-border flex items-center justify-between">
+                <p className="text-xs text-secondary">
                   Dogymorbis v0.21.0
                 </p>
+                <ThemeToggle size="sm" />
               </div>
             </div>
           </motion.div>
@@ -378,4 +310,4 @@ export function Sidebar({ isOpen, onClose, onScreenChange, activeScreen, isGuest
       )}
     </AnimatePresence>
   );
-} 
+}

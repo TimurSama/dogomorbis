@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 72 72">
+  <defs>
+    <style>
+      .medallion { fill: var(--loader-ball); }
+      .ring { fill: none; stroke: var(--loader-track); stroke-width: 2; }
+      .center { fill: var(--loader-highlight); }
+    </style>
+  </defs>
+  
+  <!-- Внешнее кольцо -->
+  <circle cx="36" cy="36" r="30" class="ring" opacity="0.3"/>
+  
+  <!-- Медальон -->
+  <circle cx="36" cy="36" r="20" class="medallion">
+    <animateTransform
+      attributeName="transform"
+      type="rotate"
+      values="0 36 36;360 36 36"
+      dur="2s"
+      repeatCount="indefinite"/>
+  </circle>
+  
+  <!-- Центр -->
+  <circle cx="36" cy="36" r="8" class="center">
+    <animate attributeName="opacity" values="0.5;1;0.5" dur="1s" repeatCount="indefinite"/>
+  </circle>
+  
+  <!-- Внутренний узор -->
+  <path d="M36 20l4 12h12l-10 8 4 12-10-8-10 8 4-12-10-8h12z" fill="var(--loader-highlight)" opacity="0.7">
+    <animateTransform
+      attributeName="transform"
+      type="rotate"
+      values="0 36 36;-360 36 36"
+      dur="3s"
+      repeatCount="indefinite"/>
+  </path>
+</svg>
+
+
+

@@ -1,7 +1,8 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useSwipeable } from 'react-swipeable';
 import { MapScreen } from './MapScreen';
 import { FeedScreen } from './FeedScreen';
 import { ProfileScreen } from './ProfileScreen';
@@ -31,6 +32,36 @@ export function GuestDashboard({ onShowAuth }: GuestDashboardProps) {
   const [activeScreen, setActiveScreen] = useState<Screen>('map');
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
+  // Обработчик свайпа для закрытия sidebar
+  const swipeHandlers = useSwipeable({
+    onSwipedRight: () => {
+      if (sidebarOpen) {
+        setSidebarOpen(false);
+      }
+    },
+    onSwipedLeft: () => {
+      if (sidebarOpen) {
+        setSidebarOpen(false);
+      }
+    },
+    trackMouse: true,
+  });
+
+  // Закрытие sidebar при клике на overlay
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (sidebarOpen) {
+        const target = event.target as Element;
+        if (!target.closest('.sidebar-content')) {
+          setSidebarOpen(false);
+        }
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, [sidebarOpen]);
+
   const screens = {
     map: <MapScreen />,
     feed: <FeedScreen />,
@@ -50,7 +81,10 @@ export function GuestDashboard({ onShowAuth }: GuestDashboardProps) {
   };
 
   return (
-    <div className="h-screen flex flex-col bg-gray-50 overflow-hidden">
+    <div 
+      className="h-screen flex flex-col bg-[var(--bg)] overflow-hidden"
+      {...swipeHandlers}
+    >
       {/* Верхняя панель */}
       <TopBar 
         onMenuClick={() => setSidebarOpen(true)}
@@ -79,7 +113,7 @@ export function GuestDashboard({ onShowAuth }: GuestDashboardProps) {
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -20 }}
-              transition={{ duration: 0.3 }}
+              transition={{ duration: 0.24, ease: [0.2, 0.8, 0.2, 1] }}
               className="h-full overflow-hidden"
             >
               {screens[activeScreen]}

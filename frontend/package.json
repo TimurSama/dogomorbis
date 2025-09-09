@@ -4,12 +4,16 @@
   "description": "Frontend для Dogymorbis - мобильного приложения для владельцев собак",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev -p 3000",
     "build": "next build",
-    "start": "next start",
+    "start": "next start -p 3000",
+    "export": "next build && next export",
+    "preview": "npx serve dist -p 3000",
     "lint": "next lint",
     "lint:fix": "next lint --fix",
     "type-check": "tsc --noEmit",
+    "clean": "rm -rf .next dist out",
+    "analyze": "ANALYZE=true next build",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage"

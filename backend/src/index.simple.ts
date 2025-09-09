@@ -2,6 +2,7 @@ import Fastify from 'fastify';
 import cors from '@fastify/cors';
 import jwt from '@fastify/jwt';
 import dotenv from 'dotenv';
+import { setupWebSocket } from './websocket';
 
 // Загружаем переменные окружения
 dotenv.config();
@@ -48,6 +49,26 @@ fastify.get('/', async (request, reply) => {
   };
 });
 
+// Placeholder images
+fastify.get('/api/placeholder/:width/:height', async (request, reply) => {
+  const { width, height } = request.params as { width: string; height: string };
+  const w = parseInt(width) || 200;
+  const h = parseInt(height) || 200;
+  
+  // Создаем простой SVG placeholder
+  const svg = `
+    <svg width="${w}" height="${h}" xmlns="http://www.w3.org/2000/svg">
+      <rect width="100%" height="100%" fill="#f0f0f0"/>
+      <text x="50%" y="50%" text-anchor="middle" dy=".3em" font-family="Arial, sans-serif" font-size="14" fill="#999">
+        ${w}×${h}
+      </text>
+    </svg>
+  `;
+  
+  reply.type('image/svg+xml');
+  return reply.send(svg);
+});
+
 // Простой тестовый endpoint
 fastify.get('/api/test', async (request, reply) => {
   return {
@@ -78,6 +99,9 @@ async function start() {
   try {
     // Регистрируем плагины
     await registerPlugins();
+
+    // Настраиваем WebSocket
+    await setupWebSocket(fastify);
 
     const port = parseInt(process.env.PORT || '3001');
     const host = process.env.HOST || '0.0.0.0';

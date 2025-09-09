@@ -10,11 +10,18 @@ import { ShopScreen } from './ShopScreen';
 import { FriendsScreen } from './FriendsScreen';
 import { GroupScreen } from './GroupScreen';
 import { MessagesScreen } from './MessagesScreen';
+import { EventsScreen } from './EventsScreen';
+import { CommunityScreen } from './CommunityScreen';
+import { DiaryScreen } from './DiaryScreen';
+import { AchievementsScreen } from './AchievementsScreen';
+import { ReferralsScreen } from './ReferralsScreen';
+import { SupportScreen } from './SupportScreen';
+import { SettingsScreen } from './SettingsScreen';
 import { BottomNavigation } from './BottomNavigation';
 import { TopBar } from './TopBar';
 import { Sidebar } from './Sidebar';
 
-type Screen = 'map' | 'feed' | 'profile' | 'wallet' | 'shop' | 'friends' | 'group' | 'messages';
+type Screen = 'map' | 'feed' | 'profile' | 'wallet' | 'shop' | 'friends' | 'group' | 'messages' | 'events' | 'community' | 'diary' | 'achievements' | 'referrals' | 'support' | 'settings';
 
 export function Dashboard() {
   const [activeScreen, setActiveScreen] = useState<Screen>('map');
@@ -29,10 +36,17 @@ export function Dashboard() {
     friends: <FriendsScreen />,
     group: <GroupScreen />,
     messages: <MessagesScreen />,
+    events: <EventsScreen />,
+    community: <CommunityScreen />,
+    diary: <DiaryScreen />,
+    achievements: <AchievementsScreen />,
+    referrals: <ReferralsScreen />,
+    support: <SupportScreen />,
+    settings: <SettingsScreen />,
   };
 
   return (
-    <div className="h-screen flex flex-col bg-gray-50">
+    <div className="h-screen flex flex-col bg-[var(--bg)] overflow-hidden">
       {/* Верхняя панель */}
       <TopBar 
         onMenuClick={() => setSidebarOpen(true)}

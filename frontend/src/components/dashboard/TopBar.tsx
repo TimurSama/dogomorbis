@@ -22,10 +22,9 @@ import {
   Gift,
   HelpCircle
 } from 'lucide-react';
+import { ThemeToggle } from '@/components/ui/ThemeToggle';
 import { Button } from '@/components/ui/button';
-import { useAuthStore } from '@/stores/auth';
-import { useNotificationStore } from '@/stores/notification';
-import { toast } from 'react-hot-toast';
+import { DogHouse } from '@/components/icons/DogHouse';
 
 interface TopBarProps {
   onMenuClick: () => void;
@@ -35,8 +34,6 @@ interface TopBarProps {
 }
 
 export function TopBar({ onMenuClick, currentScreen, isGuest = false, onShowAuth }: TopBarProps) {
-  const { user, logout } = useAuthStore();
-  const { unreadCount, notifications, markAsRead } = useNotificationStore();
   const [showNotifications, setShowNotifications] = useState(false);
   const [showUserMenu, setShowUserMenu] = useState(false);
 
@@ -78,37 +75,24 @@ export function TopBar({ onMenuClick, currentScreen, isGuest = false, onShowAuth
 
   const CurrentIcon = screenIcons[currentScreen];
 
-  const handleLogout = async () => {
-    try {
-      await logout();
-      toast.success('Вы успешно вышли из системы');
-    } catch (error) {
-      toast.error('Ошибка при выходе из системы');
-    }
-  };
-
-  const handleNotificationClick = async (notificationId: string) => {
-    await markAsRead(notificationId);
-    setShowNotifications(false);
-  };
-
   return (
-    <div className="bg-white/95 backdrop-blur-md border-b border-pink-200/30 px-4 py-3 soft-shadow fur-texture pencil-border">
+    <div className="surface border-b border-outline px-4 py-3 safe-area-top">
       <div className="flex items-center justify-between">
         {/* Левая часть */}
         <div className="flex items-center space-x-3">
-          <Button
-            variant="ghost"
-            size="icon"
+          <motion.button
             onClick={onMenuClick}
-            className="hover:bg-pink-100/50 gentle-float"
+            className="state-layer p-2 rounded-[var(--radius-sm)] transition-colors touch-target"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            aria-label="Открыть меню"
           >
-            <Menu className="h-5 w-5 text-purple-600" />
-          </Button>
+            <Menu className="w-6 h-6" />
+          </motion.button>
 
           <div className="flex items-center space-x-2">
-            <CurrentIcon className="h-6 w-6 text-purple-600" />
-            <h1 className="text-lg font-semibold text-purple-700 font-display">
+            <DogHouse className="w-6 h-6 text-[color:var(--text)]" />
+            <h1 className="text-lg font-semibold text-[color:var(--text)]">
               {screenTitles[currentScreen]}
             </h1>
           </div>
@@ -120,18 +104,14 @@ export function TopBar({ onMenuClick, currentScreen, isGuest = false, onShowAuth
             /* Гостевой режим */
             <>
               <Button
-                variant="outline"
-                size="sm"
+                variant="ghost"
                 onClick={onShowAuth}
-                className="text-purple-600 border-purple-300 hover:bg-purple-50"
               >
                 Войти
               </Button>
               <Button
-                variant="default"
-                size="sm"
+                variant="primary"
                 onClick={onShowAuth}
-                className="bg-gradient-to-r from-pink-300 to-purple-400 hover:from-pink-400 hover:to-purple-500 text-purple-800"
               >
                 Регистрация
               </Button>
@@ -140,29 +120,28 @@ export function TopBar({ onMenuClick, currentScreen, isGuest = false, onShowAuth
             /* Обычный режим */
             <>
               {/* Поиск */}
-              <Button
-                variant="ghost"
-                size="icon"
-                className="hidden sm:flex"
+              <motion.button 
+                className="hidden sm:flex p-2 hover:bg-[var(--surface-2)] rounded-[var(--radius-md)] transition-colors touch-target"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                aria-label="Поиск"
               >
-                <Search className="h-5 w-5" />
-              </Button>
+                <Search className="w-6 h-6 text-[var(--text)]" />
+              </motion.button>
 
               {/* Уведомления */}
               <div className="relative">
-                <Button
-                  variant="ghost"
-                  size="icon"
+                <motion.button
                   onClick={() => setShowNotifications(!showNotifications)}
-                  className="relative"
+                  className="p-2 hover:bg-[var(--surface-2)] rounded-[var(--radius-md)] transition-colors touch-target relative"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  aria-label="Уведомления"
                 >
-                  <Bell className="h-5 w-5" />
-                  {unreadCount > 0 && (
-                    <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
-                      {unreadCount > 9 ? '9+' : unreadCount}
-                    </span>
-                  )}
-                </Button>
+                  <Bell className="w-6 h-6 text-[var(--text)]" />
+                  {/* Индикатор непрочитанных */}
+                  <span className="absolute -top-1 -right-1 w-3 h-3 bg-[var(--danger)] rounded-full border-2 border-[var(--surface)]"></span>
+                </motion.button>
 
                 {/* Выпадающее меню уведомлений */}
                 <AnimatePresence>
@@ -172,82 +151,38 @@ export function TopBar({ onMenuClick, currentScreen, isGuest = false, onShowAuth
                       animate={{ opacity: 1, y: 0, scale: 1 }}
                       exit={{ opacity: 0, y: -10, scale: 0.95 }}
                       transition={{ duration: 0.2 }}
-                      className="absolute right-0 top-full mt-2 w-80 bg-white border border-gray-200 rounded-lg shadow-lg z-50"
+                      className="absolute right-0 top-full mt-2 w-80 bg-[var(--surface)] border border-[var(--outline)] rounded-[var(--radius-lg)] shadow-lg z-50"
                     >
-                      <div className="p-4 border-b border-gray-200">
-                        <h3 className="text-sm font-medium text-gray-900">
+                      <div className="p-4 border-b border-[var(--outline)]">
+                        <h3 className="text-sm font-medium text-[var(--text)]">
                           Уведомления
                         </h3>
                       </div>
                       
                       <div className="max-h-64 overflow-y-auto">
-                        {notifications.length === 0 ? (
-                          <div className="p-4 text-center text-gray-500">
-                            Нет новых уведомлений
-                          </div>
-                        ) : (
-                          notifications.slice(0, 5).map((notification) => (
-                            <div
-                              key={notification.id}
-                              onClick={() => handleNotificationClick(notification.id)}
-                              className={`p-4 border-b border-gray-100 cursor-pointer hover:bg-gray-50 ${
-                                !notification.isRead ? 'bg-blue-50' : ''
-                              }`}
-                            >
-                              <div className="flex items-start space-x-3">
-                                <div className="flex-shrink-0">
-                                  <div className="w-2 h-2 bg-primary-600 rounded-full"></div>
-                                </div>
-                                <div className="flex-1 min-w-0">
-                                  <p className="text-sm font-medium text-gray-900">
-                                    {notification.title}
-                                  </p>
-                                  <p className="text-sm text-gray-500 mt-1">
-                                    {notification.message}
-                                  </p>
-                                  <p className="text-xs text-gray-400 mt-2">
-                                    {new Date(notification.createdAt).toLocaleString()}
-                                  </p>
-                                </div>
-                              </div>
-                            </div>
-                          ))
-                        )}
-                      </div>
-                      
-                      {notifications.length > 5 && (
-                        <div className="p-3 border-t border-gray-200">
-                          <Button
-                            variant="ghost"
-                            size="sm"
-                            className="w-full text-primary-600 hover:text-primary-700"
-                          >
-                            Показать все уведомления
-                          </Button>
+                        <div className="p-4 text-center text-[var(--text-secondary)]">
+                          Нет новых уведомлений
                         </div>
-                      )}
+                      </div>
                     </motion.div>
                   )}
                 </AnimatePresence>
               </div>
 
+              {/* Переключатель темы */}
+              <ThemeToggle size="sm" />
+
               {/* Пользовательское меню */}
               <div className="relative">
-                <Button
-                  variant="ghost"
-                  size="icon"
+                <motion.button
                   onClick={() => setShowUserMenu(!showUserMenu)}
+                  className="p-2 hover:bg-[var(--surface-2)] rounded-[var(--radius-md)] transition-colors touch-target"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  aria-label="Меню пользователя"
                 >
-                  {user?.avatar ? (
-                    <img
-                      src={user.avatar}
-                      alt={user.username}
-                      className="h-8 w-8 rounded-full"
-                    />
-                  ) : (
-                    <User className="h-5 w-5" />
-                  )}
-                </Button>
+                  <User className="w-6 h-6 text-[var(--text)]" />
+                </motion.button>
 
                 {/* Выпадающее меню пользователя */}
                 <AnimatePresence>
@@ -257,36 +192,27 @@ export function TopBar({ onMenuClick, currentScreen, isGuest = false, onShowAuth
                       animate={{ opacity: 1, y: 0, scale: 1 }}
                       exit={{ opacity: 0, y: -10, scale: 0.95 }}
                       transition={{ duration: 0.2 }}
-                      className="absolute right-0 top-full mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg z-50"
+                      className="absolute right-0 top-full mt-2 w-48 bg-[var(--surface)] border border-[var(--outline)] rounded-[var(--radius-lg)] shadow-lg z-50"
                     >
-                      <div className="p-3 border-b border-gray-200">
-                        <p className="text-sm font-medium text-gray-900">
-                          {user?.firstName} {user?.lastName}
+                      <div className="p-3 border-b border-[var(--outline)]">
+                        <p className="text-sm font-medium text-[var(--text)]">
+                          Пользователь
                         </p>
-                        <p className="text-xs text-gray-500">
-                          @{user?.username}
+                        <p className="text-xs text-[var(--text-secondary)]">
+                          @username
                         </p>
                       </div>
-                      
+
                       <div className="py-1">
-                        <Button
-                          variant="ghost"
-                          size="sm"
-                          className="w-full justify-start px-3 py-2"
-                        >
-                          <Settings className="h-4 w-4 mr-2" />
-                          Настройки
-                        </Button>
-                        
-                        <Button
-                          variant="ghost"
-                          size="sm"
-                          onClick={handleLogout}
-                          className="w-full justify-start px-3 py-2 text-red-600 hover:text-red-700 hover:bg-red-50"
-                        >
-                          <LogOut className="h-4 w-4 mr-2" />
-                          Выйти
-                        </Button>
+                        <button className="w-full flex items-center space-x-2 px-3 py-2 text-sm text-[var(--text)] hover:bg-[var(--surface-2)] transition-colors">
+                          <Settings className="h-4 w-4" />
+                          <span>Настройки</span>
+                        </button>
+
+                        <button className="w-full flex items-center space-x-2 px-3 py-2 text-sm text-[var(--danger)] hover:bg-[var(--surface-2)] transition-colors">
+                          <LogOut className="h-4 w-4" />
+                          <span>Выйти</span>
+                        </button>
                       </div>
                     </motion.div>
                   )}
@@ -298,4 +224,4 @@ export function TopBar({ onMenuClick, currentScreen, isGuest = false, onShowAuth
       </div>
     </div>
   );
-} 
+}

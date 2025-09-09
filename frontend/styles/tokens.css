@@ -1,0 +1,71 @@
+:root {
+  /* типографика */
+  --font-sans: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  --fs-12: 12px; --fs-13: 13px; --fs-14: 14px; --fs-16: 16px; --fs-20: 20px; --fs-24: 24px; --fs-28: 28px;
+
+  /* радиусы/бордеры/отступы */
+  --r-6: 6px; --r-8: 8px; --r-12: 12px; --r-16: 16px; --r-24: 24px;
+  --b-1: 1px; --b-2: 2px;
+  --gap-8: 8px; --gap-12: 12px; --gap-16: 16px; --gap-24: 24px; --gap-32: 32px;
+
+  /* LIGHT THEME (по умолчанию) */
+  --bg: #FFFFFF;
+  --surface: #FAF8F5;   /* тёплый белый для панелей */
+  --surface-2: #F0ECE7; /* второй уровень */
+  --text: #1C1A19;
+  --text-dim: #58524D;
+  --line: #D9D3CC;
+  --outline: #B8AEA5;
+
+  /* акценты */
+  --a-sky: #AFCBFF;     /* небесный синий */
+  --a-honey: #E8DCA8;   /* мёд */
+  --a-burgundy: #A95056;/* бордовый */
+  --a-choco: #6B4B3E;   /* шоколадный (декор) */
+
+  /* семантика */
+  --success: #86C8BC; --warn: #E1A177; --danger: #E57C73; --info: #7FA7D9;
+
+  /* иконки/шаги */
+  --icon-size: 24px; --icon-stroke: 2px;
+
+  /* тени/глубина (минимум) */
+  --shadow-thin: 0 1px 0 rgba(0,0,0,.08), 0 0 0 1px var(--line);
+  --shadow-card: 0 2px 8px rgba(0,0,0,.10), 0 0 0 1px var(--outline);
+
+  /* blur */
+  --blur-xs: 6px; --blur-sm: 10px; --blur-md: 14px;
+
+  /* лоадеры */
+  --loader-track: var(--outline);
+  --loader-highlight: #B8AEA5;
+  --loader-ball: var(--a-sky);
+}
+
+/* DARK THEME */
+:root[data-theme="dark"]{
+  --bg: #2C2B29;        /* graphite */
+  --surface: #1F1E1C;   /* coal warm */
+  --surface-2: #3A3634; /* asphalt */
+  --text: #F5F4F2;      /* cream */
+  --text-dim: #CFCAC5;  /* mist */
+  --line: #4A4542;
+  --outline: #665E58;
+
+  --a-sky: #AFCBFF;
+  --a-honey: #E8DCA8;
+  --a-burgundy: #A95056;
+  --a-choco: #6B4B3E;
+
+  --success: #86C8BC; --warn: #E1A177; --danger: #E57C73; --info: #7FA7D9;
+
+  --shadow-thin: 0 1px 0 rgba(0,0,0,.35), 0 0 0 1px var(--line);
+  --shadow-card: 0 2px 8px rgba(0,0,0,.35), 0 0 0 1px var(--outline);
+
+  --loader-track: var(--line);
+  --loader-highlight: var(--outline);
+  --loader-ball: var(--a-honey);
+}
+
+
+

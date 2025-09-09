@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 72 72">
+  <defs>
+    <style>
+      .ball { fill: var(--loader-ball); }
+      .track { fill: none; stroke: var(--loader-track); stroke-width: 2; }
+      .highlight { fill: var(--loader-highlight); }
+    </style>
+  </defs>
+  
+  <!-- Трек -->
+  <circle cx="36" cy="36" r="28" class="track" opacity="0.3"/>
+  
+  <!-- Мячик -->
+  <circle cx="36" cy="8" r="6" class="ball">
+    <animateTransform
+      attributeName="transform"
+      type="rotate"
+      values="0 36 36;360 36 36"
+      dur="1.5s"
+      repeatCount="indefinite"/>
+  </circle>
+  
+  <!-- Подсветка на мячике -->
+  <circle cx="34" cy="6" r="2" class="highlight" opacity="0.6">
+    <animateTransform
+      attributeName="transform"
+      type="rotate"
+      values="0 36 36;360 36 36"
+      dur="1.5s"
+      repeatCount="indefinite"/>
+  </circle>
+</svg>
+
+
+

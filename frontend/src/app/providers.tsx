@@ -3,6 +3,7 @@
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
 import { useState, useEffect } from 'react';
+import { Toaster } from 'react-hot-toast';
 import { useAuthStore } from '@/stores/auth';
 import { useUserStore } from '@/stores/user';
 import { useMapStore } from '@/stores/map';
@@ -46,6 +47,19 @@ export function Providers({ children }: ProvidersProps) {
             <NotificationProvider>
               <WebSocketProvider>
                 {children}
+                <Toaster 
+                  position="top-right"
+                  toastOptions={{
+                    duration: 4000,
+                    style: {
+                      background: 'var(--surface)',
+                      color: 'var(--text)',
+                      border: '1px solid var(--outline)',
+                      borderRadius: 'var(--radius-md)',
+                      boxShadow: 'var(--card-shadow)',
+                    },
+                  }}
+                />
               </WebSocketProvider>
             </NotificationProvider>
           </MapProvider>

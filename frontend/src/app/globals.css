@@ -2,525 +2,184 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Kalam:wght@300;400;700&family=Quicksand:wght@300;400;500;600;700&display=swap');
+/* Импорт наших стилей */
+@import url('../../styles/tokens.css');
+@import url('../../styles/base.css');
+@import url('../../styles/components.css');
+@import url('../../styles/motion.css');
 
-@layer base {
-  * {
-    @apply border-pink-200/30;
-  }
-  
-  body {
-    @apply bg-gradient-to-br from-pink-50 via-purple-50 to-blue-50;
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    font-feature-settings: "rlig" 1, "calt" 1;
-    background-attachment: fixed;
-    color: #2d1b0e;
-    background-image: 
-      radial-gradient(circle at 25% 25%, rgba(255, 182, 193, 0.1) 0%, transparent 50%),
-      radial-gradient(circle at 75% 75%, rgba(221, 160, 221, 0.1) 0%, transparent 50%),
-      radial-gradient(circle at 50% 50%, rgba(173, 216, 230, 0.1) 0%, transparent 50%);
-  }
-  
-  /* Скрытие ползунков скролла */
-  * {
-    scrollbar-width: none; /* Firefox */
-    -ms-overflow-style: none; /* IE and Edge */
-  }
-  
-  *::-webkit-scrollbar {
-    display: none; /* Chrome, Safari, Opera */
-  }
+/* Токены тем через CSS-переменные: */
+:root {
+  --bg: #FFFFFF;
+  --surface: #FAF8F5;
+  --surface-2: #F0ECE7;
+  --text: #1C1A19;
+  --text-secondary: #58524D;
+  --dim: #58524D;
+  --line: #D9D3CC;
+  --outline: #B8AEA5;
 
-  html {
-    scroll-behavior: smooth;
-  }
-  
-  /* Studio Ghibli стиль для заголовков */
-  h1, h2, h3, h4, h5, h6 {
-    font-family: 'Kalam', cursive;
-    font-weight: 700;
-    letter-spacing: -0.02em;
-    color: #6b46c1;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
-  }
-  
-  /* Мягкие тени и скругления в стиле карандаша */
-  .soft-shadow {
-    box-shadow: 
-      0 2px 8px rgba(107, 70, 193, 0.1),
-      0 1px 3px rgba(107, 70, 193, 0.15),
-      inset 0 1px 0 rgba(255, 255, 255, 0.2);
-  }
-  
-  .soft-shadow-lg {
-    box-shadow: 
-      0 4px 16px rgba(107, 70, 193, 0.12),
-      0 2px 6px rgba(107, 70, 193, 0.18),
-      inset 0 1px 0 rgba(255, 255, 255, 0.3);
-  }
-  
-  /* Текстуры плюшевой шерсти */
-  .fur-texture {
-    background-image: 
-      radial-gradient(circle at 20% 50%, rgba(255, 182, 193, 0.15) 0%, transparent 50%),
-      radial-gradient(circle at 80% 20%, rgba(221, 160, 221, 0.15) 0%, transparent 50%),
-      radial-gradient(circle at 40% 80%, rgba(173, 216, 230, 0.15) 0%, transparent 50%),
-      radial-gradient(circle at 60% 30%, rgba(255, 218, 185, 0.1) 0%, transparent 50%);
-    background-size: 120px 120px, 100px 100px, 140px 140px, 80px 80px;
-  }
-  
-  /* Карандашные контуры */
-  .pencil-border {
-    border: 2px solid rgba(107, 70, 193, 0.3);
-    border-radius: 20px;
-    position: relative;
-  }
-  
-  .pencil-border::before {
-    content: '';
-    position: absolute;
-    top: -1px;
-    left: -1px;
-    right: -1px;
-    bottom: -1px;
-    border-radius: 20px;
-    background: linear-gradient(45deg, 
-      rgba(255, 182, 193, 0.3) 0%, 
-      rgba(221, 160, 221, 0.3) 25%, 
-      rgba(173, 216, 230, 0.3) 50%, 
-      rgba(255, 218, 185, 0.3) 75%, 
-      rgba(255, 182, 193, 0.3) 100%);
-    z-index: -1;
-    filter: blur(1px);
-  }
-  
-  /* Анимации */
-  @keyframes gentle-float {
-    0%, 100% { transform: translateY(0px); }
-    50% { transform: translateY(-2px); }
-  }
-  
-  @keyframes soft-pulse {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.8; }
-  }
-  
-  @keyframes wag-tail {
-    0%, 100% { transform: rotate(0deg); }
-    25% { transform: rotate(10deg); }
-    75% { transform: rotate(-10deg); }
-  }
-  
-  .gentle-float {
-    animation: gentle-float 3s ease-in-out infinite;
-  }
-  
-  .soft-pulse {
-    animation: soft-pulse 2s ease-in-out infinite;
-  }
-  
-  .wag-tail {
-    animation: wag-tail 1s ease-in-out infinite;
-  }
+  --sky: #AFCBFF;
+  --honey: #E8DCA8;
+  --burgundy: #A95056;
+  --choco: #6B4B3E;
+
+  --success: #86C8BC;
+  --warn: #E1A177;
+  --danger: #E57C73;
+
+  --blur-sm: 10px;
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+
+  --outline-shadow: 0 1px 0 rgba(0,0,0,.08), 0 0 0 1px var(--outline);
+  --card-shadow: 0 2px 8px rgba(0,0,0,.10), 0 0 0 1px var(--outline);
+
+  /* elevation (без градиентов) */
+  --elev-0: 0 0 0 1px var(--outline);
+  --elev-1: 0 1px 0 rgba(0,0,0,.06), 0 0 0 1px var(--outline);
+  --elev-2: 0 2px 6px rgba(0,0,0,.10), 0 0 0 1px var(--outline);
+  --elev-3: 0 4px 12px rgba(0,0,0,.14), 0 0 0 1px var(--outline);
+  --state-opacity-hover: .06;
+  --state-opacity-press: .10;
 }
 
-@layer components {
-  /* Кастомные компоненты в стиле Studio Ghibli */
-  .btn {
-    @apply inline-flex items-center justify-center rounded-2xl px-6 py-3 text-sm font-medium transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-300 focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none soft-shadow pencil-border;
-    font-family: 'Quicksand', sans-serif;
-    font-weight: 600;
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.7) 100%);
-    backdrop-filter: blur(10px);
-  }
+/* Dark */
+:root[data-theme="dark"] {
+  --bg: #2C2B29;
+  --surface: #1F1E1C;
+  --surface-2: #3A3634;
+  --text: #F5F4F2;
+  --dim: #CFCAC5;
+  --line: #4A4542;
+  --outline: #665E58;
 
-  .btn-primary {
-    background: linear-gradient(135deg, #ffb6c1 0%, #ffc0cb 50%, #ffb6c1 100%);
-    color: #6b46c1;
-    border-color: rgba(255, 182, 193, 0.5);
-  }
-  
-  .btn-primary:hover {
-    transform: scale(1.05);
-  }
-  
-  .btn-primary:active {
-    transform: scale(0.95);
-  }
+  --outline-shadow: 0 1px 0 rgba(0,0,0,.35), 0 0 0 1px var(--line);
+  --card-shadow: 0 2px 8px rgba(0,0,0,.35), 0 0 0 1px var(--outline);
 
-  .btn-secondary {
-    background: linear-gradient(135deg, #dda0dd 0%, #e6a8e6 50%, #dda0dd 100%);
-    color: #6b46c1;
-    border-color: rgba(221, 160, 221, 0.5);
-  }
-  
-  .btn-secondary:hover {
-    transform: scale(1.05);
-  }
-  
-  .btn-secondary:active {
-    transform: scale(0.95);
-  }
-
-  .btn-destructive {
-    background: linear-gradient(135deg, #ffa0a0 0%, #ffb3b3 50%, #ffa0a0 100%);
-    color: #6b46c1;
-    border-color: rgba(255, 160, 160, 0.5);
-  }
-  
-  .btn-destructive:hover {
-    transform: scale(1.05);
-  }
-  
-  .btn-destructive:active {
-    transform: scale(0.95);
-  }
-
-  .btn-outline {
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.7) 100%);
-    border: 2px solid rgba(173, 216, 230, 0.6);
-    color: #6b46c1;
-  }
-  
-  .btn-outline:hover {
-    transform: scale(1.05);
-  }
-  
-  .btn-outline:active {
-    transform: scale(0.95);
-  }
-
-  .btn-ghost {
-    background: transparent;
-    color: #6b46c1;
-    border: 2px solid transparent;
-  }
-  
-  .btn-ghost:hover {
-    transform: scale(1.05);
-  }
-  
-  .btn-ghost:active {
-    transform: scale(0.95);
-  }
-
-  .btn-link {
-    @apply text-primary-500 underline-offset-4 hover:underline;
-  }
-
-  .btn-sm {
-    @apply h-9 px-3 rounded-md;
-  }
-
-  .btn-lg {
-    @apply h-11 px-8 rounded-md;
-  }
-
-  .card {
-    @apply rounded-3xl text-gray-800 soft-shadow fur-texture pencil-border;
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(255, 255, 255, 0.95) 100%);
-    backdrop-filter: blur(15px);
-    border: 2px solid rgba(255, 182, 193, 0.3);
-  }
-
-  .card-header {
-    @apply flex flex-col space-y-1.5 p-6;
-  }
-
-  .card-title {
-    @apply text-2xl font-semibold leading-none tracking-tight text-gray-800;
-  }
-
-  .card-description {
-    @apply text-sm text-gray-700;
-  }
-
-  .card-content {
-    @apply p-6 pt-0;
-  }
-
-  .card-footer {
-    @apply flex items-center p-6 pt-0;
-  }
-
-  .input {
-    @apply flex h-10 w-full rounded-md border border-pink-300 bg-white/90 backdrop-blur-sm px-3 py-2 text-sm file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-purple-400 text-gray-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-500 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50;
-  }
-
-  .label {
-    @apply text-sm font-medium leading-none text-gray-800 peer-disabled:cursor-not-allowed peer-disabled:opacity-70;
-  }
-
-  .badge {
-    @apply inline-flex items-center rounded-full border border-pink-300 px-2.5 py-0.5 text-xs font-semibold text-gray-800 bg-white/90 backdrop-blur-sm transition-colors focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2;
-  }
-
-  .badge-default {
-    @apply border-transparent bg-gradient-to-r from-pink-300 to-purple-400 text-purple-800 hover:from-pink-400 hover:to-purple-500;
-  }
-
-  .badge-secondary {
-    @apply border-transparent bg-gradient-to-r from-purple-200 to-pink-300 text-purple-800 hover:from-purple-300 hover:to-pink-400;
-  }
-
-  .badge-destructive {
-    @apply border-transparent bg-gradient-to-r from-red-300 to-pink-400 text-red-800 hover:from-red-400 hover:to-pink-500;
-  }
-
-  .badge-outline {
-    @apply text-gray-800 border-pink-300 bg-white/90;
-  }
-
-  /* Анимации для кнопок */
-  .btn-bounce {
-    @apply transition-transform active:scale-95;
-  }
-
-  .btn-pulse {
-    @apply animate-pulse;
-  }
-
-  /* Стили для мобильных устройств */
-  .mobile-safe {
-    padding-top: env(safe-area-inset-top);
-    padding-bottom: env(safe-area-inset-bottom);
-    padding-left: env(safe-area-inset-left);
-    padding-right: env(safe-area-inset-right);
-  }
-
-  /* Стили для PWA */
-  .pwa-header {
-    @apply fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-200;
-  }
-
-  .pwa-content {
-    @apply pt-16 pb-20;
-  }
-
-  .pwa-bottom-nav {
-    @apply fixed bottom-0 left-0 right-0 z-50 bg-white border-t border-gray-200;
-  }
-
-  /* Стили для карты */
-  .map-container {
-    @apply relative w-full h-full;
-  }
-
-  .map-overlay {
-    @apply absolute inset-0 pointer-events-none;
-  }
-
-  .map-controls {
-    @apply absolute top-4 right-4 flex flex-col gap-2;
-  }
-
-  /* Стили для аватаров */
-  .avatar {
-    @apply relative flex h-10 w-10 shrink-0 overflow-hidden rounded-full;
-  }
-
-  .avatar-sm {
-    @apply h-8 w-8;
-  }
-
-  .avatar-lg {
-    @apply h-12 w-12;
-  }
-
-  .avatar-xl {
-    @apply h-16 w-16;
-  }
-
-  /* Стили для скелетонов */
-  .skeleton {
-    @apply animate-pulse rounded-md bg-gray-200;
-  }
-
-  /* Стили для градиентов */
-  .gradient-primary {
-    @apply bg-gradient-to-r from-primary-500 to-primary-600;
-  }
-
-  .gradient-secondary {
-    @apply bg-gradient-to-r from-secondary-500 to-secondary-600;
-  }
-
-  .gradient-bone {
-    @apply bg-gradient-to-r from-bone-400 to-bone-500;
-  }
-
-  .gradient-yarn {
-    @apply bg-gradient-to-r from-yarn-400 to-yarn-500;
-  }
-
-  /* Стили для теней */
-  .shadow-soft {
-    box-shadow: 0 2px 15px -3px rgba(0, 0, 0, 0.07), 0 10px 20px -2px rgba(0, 0, 0, 0.04);
-  }
-
-  .shadow-medium {
-    box-shadow: 0 4px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-  }
-
-  .shadow-strong {
-    box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.15), 0 2px 10px -2px rgba(0, 0, 0, 0.05);
-  }
-
-  /* Стили для скролла */
-  .scrollbar-hide {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-  }
-
-  .scrollbar-hide::-webkit-scrollbar {
-    display: none;
-  }
-
-  /* Стили для анимаций */
-  .animate-float {
-    animation: float 3s ease-in-out infinite;
-  }
-
-  .animate-wiggle {
-    animation: wiggle 1s ease-in-out infinite;
-  }
-
-  /* Стили для состояний загрузки */
-  .loading {
-    @apply opacity-50 pointer-events-none;
-  }
-
-  .loading-spinner {
-    @apply animate-spin rounded-full border-2 border-gray-300 border-t-primary-500;
-  }
-
-  /* Стили для уведомлений */
-  .notification {
-    @apply fixed top-4 right-4 z-50 max-w-sm w-full bg-white rounded-lg shadow-lg border border-gray-200;
-  }
-
-  /* Стили для модальных окон */
-  .modal-overlay {
-    @apply fixed inset-0 bg-black/50 backdrop-blur-sm z-50;
-  }
-
-  .modal-content {
-    @apply fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white rounded-lg shadow-xl max-w-md w-full mx-4;
-  }
-
-  /* Стили для тултипов */
-  .tooltip {
-    @apply absolute z-50 px-2 py-1 text-xs text-white bg-gray-900 rounded shadow-lg opacity-0 pointer-events-none transition-opacity;
-  }
-
-  .tooltip.show {
-    @apply opacity-100;
-  }
-
-  /* Стили для прогресс-баров */
-  .progress {
-    @apply w-full bg-gray-200 rounded-full h-2;
-  }
-
-  .progress-bar {
-    @apply bg-primary-500 h-2 rounded-full transition-all duration-300;
-  }
-
-  /* Стили для чекбоксов */
-  .checkbox {
-    @apply h-4 w-4 rounded border-gray-300 text-primary-600 focus:ring-primary-500;
-  }
-
-  /* Стили для радио-кнопок */
-  .radio {
-    @apply h-4 w-4 border-gray-300 text-primary-600 focus:ring-primary-500;
-  }
-
-  /* Стили для селектов */
-  .select {
-    @apply block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500;
-  }
-
-  /* Стили для текстовых областей */
-  .textarea {
-    @apply block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500;
-  }
+  /* elevation (dark) */
+  --elev-1: 0 1px 0 rgba(0,0,0,.35), 0 0 0 1px var(--line);
+  --elev-2: 0 2px 8px rgba(0,0,0,.35), 0 0 0 1px var(--outline);
+  --elev-3: 0 6px 16px rgba(0,0,0,.45), 0 0 0 1px var(--outline);
 }
 
-@layer utilities {
-  /* Утилиты для текста */
-  .text-balance {
-    text-wrap: balance;
-  }
+/* База */
+html, body { height: 100%; }
+body {
+  @apply bg-[var(--bg)] text-[color:var(--text)] font-sans antialiased;
+  line-height: 1.45;
+}
 
-  /* Утилиты для скролла */
-  .scroll-smooth {
-    scroll-behavior: smooth;
-  }
+/* современный микрошум без градиентов */
+.bg-noise {
+  background-color: var(--bg);
+  background-image: url("data:image/svg+xml;utf8,\
+  <svg xmlns='http://www.w3.org/2000/svg' width='64' height='64' viewBox='0 0 64 64'>\
+  <filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='1' stitchTiles='stitch'/>\
+  <feColorMatrix type='saturate' values='0'/><feComponentTransfer>\
+  <feFuncA type='table' tableValues='0 0 0 0 .02 .035 .03 0 0 0'/></feComponentTransfer></filter>\
+  <rect width='100%' height='100%' filter='url(%23n)' fill='transparent'/></svg>");
+  background-size: 256px 256px;
+}
 
-  /* Утилиты для выбора текста */
-  .select-none {
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-  }
+/* Утилиты на токенах */
+.surface     { background: var(--surface); }
+.surface-2   { background: var(--surface-2); }
 
-  /* Утилиты для курсора */
-  .cursor-grab {
-    cursor: grab;
-  }
+/* Safe area для мобильных устройств */
+.safe-area-top {
+  padding-top: env(safe-area-inset-top, 0);
+}
+.safe-area-bottom {
+  padding-bottom: env(safe-area-inset-bottom, 0);
+}
+.border-line { border-color: var(--line); }
+.border-outline { border-color: var(--outline); }
+.text-dim    { color: var(--dim); }
+.outline-shadow { box-shadow: var(--outline-shadow); }
+.card-shadow { box-shadow: var(--card-shadow); }
 
-  .cursor-grabbing {
-    cursor: grabbing;
-  }
+/* Формы */
+.round-sm { border-radius: var(--radius-sm); }
+.round-md { border-radius: var(--radius-md); }
+.round-lg { border-radius: var(--radius-lg); }
+.round-xl { border-radius: var(--radius-xl); }
 
-  /* Утилиты для трансформаций */
-  .transform-gpu {
-    transform: translateZ(0);
-  }
+/* Интеракции */
+a { color: var(--sky); }
 
-  /* Утилиты для фильтров */
-  .backdrop-blur-xs {
-    backdrop-filter: blur(2px);
-  }
+/* Elevation утилиты */
+.elev-0{ box-shadow: var(--elev-0) }
+.elev-1{ box-shadow: var(--elev-1) }
+.elev-2{ box-shadow: var(--elev-2) }
+.elev-3{ box-shadow: var(--elev-3) }
 
-  /* Утилиты для анимаций */
-  .animate-pause {
-    animation-play-state: paused;
-  }
+/* State-layer для тактильности */
+.state-layer {
+  position: relative; isolation: isolate;
+}
+.state-layer::after{
+  content:""; position:absolute; inset:0; border-radius: inherit;
+  background: currentColor; opacity: 0; pointer-events: none;
+  transition: opacity 140ms ease-out;
+  mix-blend-mode: normal; /* чистая заливка */
+}
+.state-layer:hover::after { opacity: var(--state-opacity-hover) }
+.state-layer:active::after { opacity: var(--state-opacity-press) }
 
-  .animate-play {
-    animation-play-state: running;
-  }
+/* Скелетоны */
+.skeleton { 
+  position:relative; 
+  overflow:hidden; 
+  background: var(--surface-2);
+  border: 1px solid var(--outline); 
+  border-radius: var(--radius-sm); 
+  box-shadow: var(--elev-0);
+}
+.skeleton::after{
+  content:""; 
+  position:absolute; 
+  inset:0; 
+  opacity:.12;
+}
 
-  /* Утилиты для фокуса */
-  .focus-visible {
-    outline: 2px solid transparent;
-    outline-offset: 2px;
-  }
+/* Sidebar стили */
+.sidebar-item {
+  @apply w-full flex items-center gap-3 px-3 py-2.5 rounded-[var(--radius-md)] transition-all duration-200;
+  @apply text-[color:var(--text)] hover:bg-[var(--surface-2)] hover:text-[color:var(--text)];
+}
 
-  .focus-visible:focus-visible {
-    outline: 2px solid theme('colors.primary.500');
-  }
+.sidebar-item.active {
+  @apply bg-[var(--honey)] text-[#1C1A19] font-medium;
+}
 
-  /* Утилиты для доступности */
-  .sr-only {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    white-space: nowrap;
-    border: 0;
-  }
+.sidebar-item-icon {
+  @apply w-5 h-5 flex-shrink-0;
+}
 
-  /* Утилиты для печати */
-  @media print {
-    .print-hidden {
-      display: none !important;
-    }
-  }
+/* Скрытие скроллбаров */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* Глобальное скрытие скроллбаров */
+* {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+*::-webkit-scrollbar {
+  display: none;
+}
+
+/* Touch targets */
+.touch-target {
+  @apply min-h-[44px] min-w-[44px];
 }

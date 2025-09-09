@@ -25,6 +25,10 @@ import daoRoutes from './routes/dao';
 import partnerRoutes from './routes/partners';
 import adminRoutes from './routes/admin';
 import aiRoutes from './routes/ai';
+import bonesRoutes from './routes/bones';
+import levelsRoutes from './routes/levels';
+import achievementsRoutes from './routes/achievements';
+import referralsRoutes from './routes/referrals';
 
 // Импортируем middleware
 import { authenticate } from './middleware/auth';
@@ -33,6 +37,9 @@ import { logger } from './utils/logger';
 
 // Импортируем WebSocket сервер
 import { setupWebSocket } from './websocket';
+
+// Импортируем систему косточкономики
+import { startBoneGenerationScheduler } from './utils/boneEconomy';
 
 const fastify = Fastify({
   logger: {
@@ -103,6 +110,10 @@ async function registerPlugins() {
           { name: 'partners', description: 'Партнёры' },
           { name: 'admin', description: 'Админ' },
           { name: 'ai', description: 'AI Assistant' },
+          { name: 'bones', description: 'Косточкономика' },
+          { name: 'levels', description: 'Система уровней' },
+          { name: 'achievements', description: 'Достижения' },
+          { name: 'referrals', description: 'Реферальная программа' },
         ],
         securityDefinitions: {
           Bearer: {
@@ -147,6 +158,10 @@ async function registerRoutes() {
   await fastify.register(daoRoutes, { prefix: '/api/dao' });
   await fastify.register(partnerRoutes, { prefix: '/api/partners' });
   await fastify.register(adminRoutes, { prefix: '/api/admin' });
+  await fastify.register(bonesRoutes, { prefix: '/api/bones' });
+  await fastify.register(levelsRoutes, { prefix: '/api/levels' });
+  await fastify.register(achievementsRoutes, { prefix: '/api/achievements' });
+  await fastify.register(referralsRoutes, { prefix: '/api/referrals' });
 }
 
 // Регистрируем middleware
@@ -223,6 +238,9 @@ async function start() {
     // Настраиваем WebSocket
     await setupWebSocket(fastify);
 
+    // Запускаем планировщик генерации косточек
+    startBoneGenerationScheduler();
+
     const port = parseInt(process.env.PORT || '3001');
     const host = process.env.HOST || '0.0.0.0';
 
@@ -231,6 +249,7 @@ async function start() {
     logger.info(`🚀 Dogymorbis API server running on http://${host}:${port}`);
     logger.info(`📚 API Documentation: http://${host}:${port}/api/docs`);
     logger.info(`🏥 Health Check: http://${host}:${port}/health`);
+    logger.info(`🦴 Bone economy system started`);
 
   } catch (error) {
     logger.error('Error starting server:', error);

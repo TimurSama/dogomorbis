@@ -1,0 +1,94 @@
+/* иконки */
+.icon { width: var(--icon-size); height: var(--icon-size); stroke: currentColor; fill: none;
+  stroke-width: var(--icon-stroke); display: inline-block; vertical-align: middle; }
+.icon-fill { fill: currentColor; stroke: none }
+
+/* панели/карточки */
+.panel { 
+  background: var(--surface); 
+  border: 1px solid var(--outline);
+  border-radius: var(--radius-lg); 
+  box-shadow: var(--elev-1); 
+}
+.card { 
+  background: var(--surface); 
+  border: 1px solid var(--outline);
+  border-radius: var(--radius-lg); 
+  box-shadow: var(--elev-2); 
+  padding: 16px; 
+}
+.card--flat { box-shadow: var(--elev-1); }
+
+/* app bar / bottom nav */
+.appbar {
+  display:flex; align-items:center; gap:var(--gap-12);
+  padding: 10px var(--gap-16); background: var(--surface);
+  border-bottom: var(--b-1) solid var(--outline); border-radius: 0 0 var(--r-12) var(--r-12);
+}
+.bottomnav {
+  position: sticky; bottom: 0; display:grid; grid-template-columns: repeat(5,1fr);
+  gap: var(--gap-8); padding: var(--gap-8); background: var(--surface);
+  border-top: var(--b-1) solid var(--outline);
+}
+.tab { display:flex; flex-direction:column; align-items:center; gap:6px; padding:8px; border-radius:var(--r-6); color: var(--text-dim); }
+.tab--active { color: var(--text); background: var(--surface-2); }
+
+/* кнопки */
+.btn {
+  display:inline-flex; align-items:center; gap:8px; padding:10px 14px;
+  border-radius: var(--r-8); border: var(--b-1) solid var(--outline);
+  background: var(--surface-2); color: var(--text);
+  box-shadow: 0 0 0 1px rgba(0,0,0,.06);
+}
+.btn--primary { background: var(--a-honey); color: #1C1A19; }
+.btn--secondary { background: var(--a-sky); color: #1F1E1C; }
+.btn--ghost { background: transparent; color: var(--text); border-color: var(--line); }
+
+/* инпуты */
+.input, .select, .textarea {
+  width:100%; background: var(--surface); color: var(--text);
+  border: var(--b-1) solid var(--line); border-radius: var(--r-8);
+  padding: 10px 12px; outline: none;
+}
+.input::placeholder { color: var(--text-dim); }
+.input:focus, .select:focus, .textarea:focus {
+  border-color: var(--a-honey); box-shadow: 0 0 0 2px rgba(232,220,168,.18);
+}
+
+/* чипы/ярлыки */
+.chip { display:inline-flex; align-items:center; gap:6px; padding:6px 8px;
+  background: var(--surface-2); border: var(--b-1) solid var(--outline); border-radius: var(--r-6); }
+
+/* модальные и шторы */
+.overlay {
+  position: fixed; inset: 0; display: grid; place-items: center;
+  background: rgba(0,0,0,.08); backdrop-filter: blur(var(--blur-sm));
+}
+.sheet, .modal { 
+  background: var(--surface); 
+  border: 1px solid var(--outline);
+  border-radius: var(--radius-xl); 
+  box-shadow: var(--elev-3); 
+  padding: 16px; 
+  backdrop-filter: blur(var(--blur-sm)); 
+}
+
+/* скелетон */
+.skeleton { 
+  position:relative; 
+  overflow:hidden; 
+  background: var(--surface-2);
+  border: 1px solid var(--outline); 
+  border-radius: var(--radius-sm); 
+  box-shadow: var(--elev-0);
+}
+.skeleton::after{
+  content:""; 
+  position:absolute; 
+  inset:0; 
+  opacity:.12;
+}
+
+/* разделители */
+.divider{height:1px;background:var(--line)}
+

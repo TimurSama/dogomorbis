@@ -58,6 +58,8 @@ echo "   API Documentation: http://localhost:3001/api/docs"
 echo "   Health Check: http://localhost:3001/health"
 echo ""
 echo "🔑 Тестовые аккаунты:"
+echo "   dev@dogymorbis.com / password123 (Команда разработчиков)"
+echo "   company@dogymorbis.com / password123 (Официальный аккаунт Dogymorbis)"
 echo "   admin@dogymorbis.com / password123 (Администратор)"
 echo "   user1@dogymorbis.com / password123 (Владелец Бобика)"
 echo "   user2@dogymorbis.com / password123 (Владелец Мурки)"
@@ -68,6 +70,11 @@ echo "   docker-compose -f docker-compose.dev.yml logs -f"
 echo ""
 echo "🛑 Для остановки используйте:"
 echo "   docker-compose -f docker-compose.dev.yml down"
+
+
+
+
+
 
 
 
